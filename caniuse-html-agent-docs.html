@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Can I Use HTML-First Agent Docs?</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="readworthy.css" />
+</head>
+<body class="doc">
+<header class="doc-hero">
+<p class="eyebrow">compatibility matrix</p>
+<h1>Can I Use HTML-First Agent Docs?</h1>
+<p class="lede">A caniuse-style guide for deciding where HTML can replace, supplement, or should avoid replacing common Markdown spec files.</p>
+</header>
+<main class="prose">
+<section class="callout"><strong>Short answer:</strong> HTML is useful today as a reference and operational layer. It is not universally supported as the required entrypoint for Markdown-native tools.</section>
+
+<h2>Status key</h2>
+<div class="status-grid">
+<section class="spec-card"><span class="status supported">Supported</span><p>HTML can be used directly with low compatibility risk.</p></section>
+<section class="spec-card"><span class="status partial">Partial</span><p>HTML can be canonical or supplemental, but Markdown is still needed for ecosystem routing.</p></section>
+<section class="spec-card"><span class="status required">Markdown required</span><p>The tool or ecosystem expects Markdown or plain text.</p></section>
+<section class="spec-card"><span class="status neutral">Not recommended</span><p>HTML adds more markup than value for this file type.</p></section>
+</div>
+
+<h2>Compatibility matrix</h2>
+<table class="matrix">
+<thead><tr><th>Spec file</th><th>Status</th><th>Keep Markdown?</th><th>HTML opportunity</th><th>Agent loading guidance</th></tr></thead>
+<tbody>
+<tr><td><code>README.md</code></td><td><span class="status required">Markdown required</span></td><td>Yes</td><td>Add <code>docs/index.html</code> for a richer landing-style version.</td><td>Load README for discovery only.</td></tr>
+<tr><td><code>SKILL.md</code></td><td><span class="status required">Markdown required</span></td><td>Yes</td><td>Use <code>references/skill.html</code> for deeper operational instructions.</td><td>Load tiny SKILL first; HTML only on relevant tasks.</td></tr>
+<tr><td><code>AGENTS.md</code></td><td><span class="status required">Markdown required</span></td><td>Yes</td><td>Use HTML references for complex workflows or architecture docs.</td><td>Keep concise; route to targeted files.</td></tr>
+<tr><td><code>install.md</code></td><td><span class="status partial">Partial</span></td><td>Usually</td><td>HTML is useful for checklists, setup states, troubleshooting cards.</td><td>Keep Markdown for quick setup; load HTML for guided install docs.</td></tr>
+<tr><td><code>design.md</code></td><td><span class="status partial">Partial</span></td><td>Yes if tools expect plain context</td><td>Strong candidate for <code>design.html</code> with tokens, swatches, examples, components.</td><td>Load Markdown summary first; HTML only for visual decisions.</td></tr>
+<tr><td><code>brand.md</code></td><td><span class="status partial">Partial</span></td><td>Yes for voice/tone summaries</td><td>HTML works well for voice cards, examples, do/don’t tables, brand assets.</td><td>Load relevant brand section only.</td></tr>
+<tr><td><code>product.md</code></td><td><span class="status partial">Partial</span></td><td>Optional</td><td>HTML works well for feature cards, requirements, status matrices, priorities.</td><td>Use HTML when product specs are complex or visual.</td></tr>
+<tr><td><code>components.md</code></td><td><span class="status supported">Supported</span></td><td>Optional</td><td>Strong HTML candidate because components benefit from rendered examples.</td><td>Load only component docs relevant to the UI task.</td></tr>
+<tr><td><code>validation.md</code></td><td><span class="status supported">Supported</span></td><td>Optional</td><td>Strong HTML candidate for structured validation-rule sections.</td><td>Load only validation rules for the current output type.</td></tr>
+<tr><td><code>prompts.md</code></td><td><span class="status partial">Partial</span></td><td>Often</td><td>HTML helps when prompts need metadata, variants, examples, and usage rules.</td><td>Index prompts; load only the selected prompt block.</td></tr>
+<tr><td><code>workflows.md</code></td><td><span class="status supported">Supported</span></td><td>Optional</td><td>HTML is useful for phased flows, decision trees, and operational states.</td><td>Load workflow sections by task trigger.</td></tr>
+<tr><td><code>architecture.md</code></td><td><span class="status partial">Partial</span></td><td>Often</td><td>HTML helps for diagrams, system cards, dependency tables.</td><td>Load specific subsystem docs only.</td></tr>
+<tr><td><code>CHANGELOG.md</code></td><td><span class="status neutral">Not recommended</span></td><td>Yes</td><td>HTML rarely adds enough value.</td><td>Do not load unless version history matters.</td></tr>
+<tr><td><code>CONTRIBUTING.md</code></td><td><span class="status neutral">Not recommended</span></td><td>Yes</td><td>HTML may help for public docs, but not as agent context.</td><td>Keep as Markdown.</td></tr>
+<tr><td><code>LICENSE</code></td><td><span class="status required">Markdown/plain text required</span></td><td>Yes</td><td>Do not convert legal source files.</td><td>Never rewrite unless explicitly requested.</td></tr>
+</tbody>
+</table>
+
+<h2>Current limitations</h2>
+<section class="warning"><h3>HTML-only is not a universal replacement</h3><p>Many tools discover instructions by exact filenames such as <code>README.md</code>, <code>AGENTS.md</code>, or <code>SKILL.md</code>. A standalone <code>new-skill.html</code> will not satisfy those requirements unless the host explicitly supports it.</p></section>
+<section class="warning"><h3>HTML can introduce waste</h3><p>Full Markdown plus full HTML duplicates increase context and maintenance cost. The recommended approach is a lightweight Markdown loader plus targeted HTML references.</p></section>
+<section class="warning"><h3>CSS is not reasoning context</h3><p>Agents usually do not need the full stylesheet. CSS is for rendering, visual inspection, and publication—not default task reasoning.</p></section>
+
+<h2>Recommended compatibility contract</h2>
+<pre><code>1. Preserve required Markdown files.
+2. Keep Markdown loaders concise.
+3. Generate HTML only where structure creates value.
+4. Never duplicate full canonical content across MD and HTML.
+5. Use task-triggered progressive disclosure.
+6. Exclude CSS from default agent context.</code></pre>
+
+<h2>Decision checklist</h2>
+<ul class="checklist compact-list">
+<li>Does an ecosystem require this exact Markdown filename?</li>
+<li>Does the doc benefit from semantic sections, cards, or validation rules?</li>
+<li>Will HTML reduce prose or merely wrap it?</li>
+<li>Can the agent load only the relevant section?</li>
+<li>Can the Markdown file remain a short compatibility layer?</li>
+</ul>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://developers.openai.com/codex/guides/agents-md">OpenAI Codex — AGENTS.md guide</a></li>
+<li><a href="https://github.com/agentskills/agentskills/blob/main/docs/specification.mdx">Agent Skills specification</a></li>
+<li><a href="https://github.com/google-labs-code/design.md">Google Labs design.md project</a></li>
+</ul>
+</main>
+</body>
+</html>

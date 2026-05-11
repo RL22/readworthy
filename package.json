@@ -1,0 +1,32 @@
+{
+  "name": "readworthy",
+  "version": "0.1.0",
+  "description": "AI-native docs optimized for readability, structure, and context efficiency.",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "readworthy.css",
+    "caniuse-html-agent-docs.html",
+    "cli-architecture.html",
+    "guide.html",
+    "html-first-agent-docs.html",
+    "index.html",
+    "readworthy-naming-brief.html",
+    "video-summary.html",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "style": "readworthy.css",
+  "exports": {
+    "./readworthy.css": "./readworthy.css"
+  },
+  "keywords": [
+    "documentation",
+    "ai",
+    "html",
+    "css",
+    "markdown",
+    "agents"
+  ]
+}

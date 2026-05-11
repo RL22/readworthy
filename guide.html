@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Readworthy Guide</title>
+  <link rel="stylesheet" href="readworthy.css" />
+</head>
+<body class="doc">
+
+<header class="doc-hero">
+  <p class="eyebrow">Readworthy Guide</p>
+  <h1>Markdown-Flavored HTML</h1>
+  <p class="lede">
+    A tiny CSS library that improves the reading experience for AI-generated
+    text output by turning plain documents into semantic, styled HTML artifacts.
+  </p>
+</header>
+
+<nav class="toc" aria-label="Table of contents">
+  <a href="#why-html">Why HTML</a>
+  <a href="#styling-guidance">Styling Guidance</a>
+  <a href="#components">Components</a>
+  <a href="video-summary.html">Output Example</a>
+</nav>
+
+<main class="prose">
+
+<p class="principle">
+  <strong>Core Idea:</strong>
+  HTML replaces Markdown when the file is no longer just writing. It becomes an
+  interface, spec, artifact, or agent-readable product.
+</p>
+
+<h2>Why Readworthy Exists</h2>
+
+<p>
+Markdown is excellent for lightweight writing, but HTML provides richer semantic
+structure, reusable components, and presentation-ready outputs.
+</p>
+
+<p>
+The goal of this project is to bridge the gap between:
+</p>
+
+<ul>
+  <li>Markdown ergonomics</li>
+  <li>Semantic HTML structure</li>
+  <li>Design systems</li>
+  <li>AI-agent workflows</li>
+</ul>
+
+<h2 id="why-html">Why HTML is Superior to Markdown for AI Workflows</h2>
+
+<section>
+  <h3>1. HTML carries structure, not just text.</h3>
+  <p>
+    Markdown is readable, but HTML gives agents explicit containers:
+    <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>,
+    <code>&lt;aside&gt;</code>, <code>&lt;nav&gt;</code>,
+    <code>&lt;figure&gt;</code>, <code>&lt;time&gt;</code>, and
+    <code>&lt;code&gt;</code>. That makes the document easier to parse, style,
+    validate, and transform.
+  </p>
+</section>
+
+<section>
+  <h3>2. HTML is presentation-ready.</h3>
+  <p>
+    Markdown usually needs a renderer. HTML can be the source, preview, and
+    final artifact in one file.
+  </p>
+</section>
+
+<section>
+  <h3>3. HTML supports component thinking.</h3>
+  <p>
+    Instead of plain Markdown blocks, you can create reusable patterns:
+  </p>
+  <pre><code>&lt;section class="callout"&gt;
+&lt;section class="timestamp"&gt;
+&lt;section class="spec-card"&gt;</code></pre>
+  <p>
+    That makes it better for agent-generated docs, landing pages, reports, and
+    style guides.
+  </p>
+</section>
+
+<section>
+  <h3>4. HTML is better for design systems.</h3>
+  <p>
+    Markdown has limited styling hooks. HTML lets you apply tokens, classes,
+    spacing rules, responsive layouts, cards, grids, badges, callouts, and print
+    styles.
+  </p>
+</section>
+
+<section>
+  <h3>5. HTML reduces ambiguity for agents.</h3>
+  <p>
+    A heading in Markdown is visually obvious, but HTML gives stronger semantic
+    intent. An agent can tell the difference between a navigation block, main
+    content, supplemental aside, warning, example, or transcript section.
+  </p>
+</section>
+
+<h2 id="styling-guidance">Styling Guidance for Replacing .md with .html</h2>
+
+<p>Use this mental model:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Markdown</th>
+      <th>HTML Replacement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Markdown file</td>
+      <td>HTML document</td>
+    </tr>
+    <tr>
+      <td>Markdown syntax</td>
+      <td>Semantic tags</td>
+    </tr>
+    <tr>
+      <td>Markdown theme</td>
+      <td>CSS design system</td>
+    </tr>
+    <tr>
+      <td>Markdown blocks</td>
+      <td>Reusable components</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Recommended Base Structure</h3>
+
+<pre><code>&lt;body class="doc"&gt;
+  &lt;header class="doc-hero"&gt;
+    &lt;p class="eyebrow"&gt;Project Spec&lt;/p&gt;
+    &lt;h1&gt;Page Title&lt;/h1&gt;
+    &lt;p class="lede"&gt;Short summary.&lt;/p&gt;
+  &lt;/header&gt;
+  &lt;nav class="toc"&gt;&lt;/nav&gt;
+  &lt;main class="prose"&gt;
+    &lt;section&gt;
+      &lt;h2&gt;Section Title&lt;/h2&gt;
+      &lt;p&gt;Content...&lt;/p&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+&lt;/body&gt;</code></pre>
+
+<h3>Core Styling Rules</h3>
+
+<pre><code>.prose {
+  max-width: 72ch;
+  margin-inline: auto;
+  line-height: 1.65;
+}
+
+.callout,
+.timestamp,
+.spec-card {
+  border-top: 1px solid var(--rw-border);
+  margin-block: 1rem;
+  padding-block: .75rem;
+}</code></pre>
+
+<h3>Install-Time Design References</h3>
+
+<p>
+readworthy.css should ship with neutral defaults, then prompt users during setup to
+provide their own design reference for colors, fonts, spacing, and component
+tone. The library should not inherit Sprintz-specific colors, type, or brand
+rules.
+</p>
+
+<h2>Atomic Design Layers</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Atoms</td>
+      <td>HTML primitives like headings and paragraphs.</td>
+    </tr>
+    <tr>
+      <td>Molecules</td>
+      <td>Reusable UI groupings like callouts.</td>
+    </tr>
+    <tr>
+      <td>Organisms</td>
+      <td>Full content sections and layouts.</td>
+    </tr>
+    <tr>
+      <td>Templates</td>
+      <td>Complete documents and article systems.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Usage</h2>
+
+<pre><code>&lt;link rel="stylesheet" href="readworthy.css"&gt;</code></pre>
+
+<h2 id="components">Component Examples</h2>
+
+<section>
+  <p>
+    These components turn plain documentation into structured, reusable,
+    agent-friendly interfaces while keeping the stylesheet adaptable through CSS
+    variables.
+  </p>
+
+  <section>
+    <h3>.badge</h3>
+    <p>
+      Small metadata labels or status indicators. Use them for version labels,
+      experimental features, AI model compatibility, tags, categories, and
+      status indicators.
+    </p>
+    <p>
+      <span class="badge">Beta</span>
+      <span class="badge">GPT-5 Ready</span>
+      <span class="badge">Docs</span>
+    </p>
+    <p>Ideal for repo READMEs, agent skills, product docs, and changelogs.</p>
+  </section>
+
+  <aside class="note">
+    <h3>.note</h3>
+    <p>
+      Low-priority supplemental context: additional explanations, best
+      practices, optional guidance, and UX recommendations.
+    </p>
+    <p>This workflow also works in Claude Code.</p>
+    <p><strong>Tone:</strong> informational and calm.</p>
+  </aside>
+
+  <section class="warning">
+    <h3>.warning</h3>
+    <p>
+      Critical caveats or failure points: breaking changes, security concerns,
+      validation requirements, unsupported workflows, and dangerous operations.
+    </p>
+    <p>Do not expose API keys in public repos.</p>
+    <p><strong>Tone:</strong> high visibility and actionable.</p>
+  </section>
+
+  <section class="example">
+    <h3>.example</h3>
+    <p>
+      Concrete demonstrations: code snippets, HTML patterns, prompt examples,
+      API requests, and CSS recipes.
+    </p>
+    <pre><code>npm install readworthy</code></pre>
+    <p>Purpose: reduce ambiguity for both humans and agents.</p>
+  </section>
+
+  <h3>.checklist</h3>
+  <p>
+    Task-oriented procedural flows for install guides, setup instructions, QA
+    validation, launch procedures, and agent workflows.
+  </p>
+  <ul class="checklist">
+    <li>Install dependencies</li>
+    <li>Configure tokens</li>
+    <li>Run validation</li>
+  </ul>
+  <p>
+    Especially useful for <code>install.md</code>, onboarding flows, and repo
+    setup.
+  </p>
+
+  <h3>.file-tree</h3>
+  <p>
+    Visual representation of project structure for repo scaffolding, agent
+    folder structures, monorepos, and documentation systems.
+  </p>
+  <pre class="file-tree">project/
+├── agents/
+├── prompts/
+├── templates/
+└── install.md</pre>
+  <p>
+    HTML keeps this representation open to later interaction: collapsible
+    folders, search, or file annotations.
+  </p>
+
+  <section class="spec-card">
+    <h3>.spec-card</h3>
+    <p>
+      Self-contained system or feature definitions: component specs, API
+      endpoint descriptions, agent definitions, prompt modules, and feature
+      breakdowns.
+    </p>
+    <h4>Validation Agent</h4>
+    <p>Ensures outputs comply with <code>design.md</code>.</p>
+    <p>Think of it as a documentation-native card component.</p>
+  </section>
+
+  <section class="prompt-block">
+    <h3>.prompt-block</h3>
+    <pre><code>System Prompt
+You are a frontend architect.
+Summarize this transcript as semantic HTML.
+Use timestamp sections, short headings, and clear supporting notes.</code></pre>
+  </section>
+  <p>
+    Use prompt blocks for system prompts, agent instructions, Codex skills,
+    Claude templates, and reusable workflows. This is not just code formatting:
+    it is semantic AI instruction formatting.
+  </p>
+
+  <section class="agent-instruction">
+    <h3>.agent-instruction</h3>
+    <p>Always validate HTML against design tokens.</p>
+    <p>
+      Use for agent constraints, validation logic, workflow sequencing, tool
+      usage policies, and role definitions.
+    </p>
+    <p>
+      Difference from <code>.prompt-block</code>: prompt blocks hold reusable
+      prompt text; agent instructions define operational execution logic.
+    </p>
+  </section>
+
+  <section class="validation-rule">
+    <h3>.validation-rule</h3>
+    <p>
+      Formal output constraints for QA requirements, design.md enforcement,
+      accessibility checks, schema validation, and brand consistency.
+    </p>
+    <ul>
+      <li>Only one H1 per page</li>
+      <li>All buttons require accessible labels</li>
+      <li>Measure must not exceed 72ch</li>
+    </ul>
+    <p>
+      Extremely valuable for AI-generated assets, automated review pipelines,
+      and agentic systems.
+    </p>
+  </section>
+</section>
+
+<h2>The Bigger Shift</h2>
+
+<p>
+Markdown documents are mostly text blobs: linear, presentation-light, and
+limited as reusable interfaces. readworthy.css components transform docs into
+semantic systems.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Old Markdown</th>
+      <th>HTML Component System</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Notes</td>
+      <td>Interfaces</td>
+    </tr>
+    <tr>
+      <td>Pages</td>
+      <td>Structured artifacts</td>
+    </tr>
+    <tr>
+      <td>Text</td>
+      <td>Semantic systems</td>
+    </tr>
+    <tr>
+      <td>Files</td>
+      <td>Reusable components</td>
+    </tr>
+    <tr>
+      <td>Static docs</td>
+      <td>Agent-operable documents</td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="principle">
+  This is why HTML becomes more powerful in AI-native workflows: the document
+  itself becomes executable structure.
+</p>
+
+</main>
+
+</body>
+</html>

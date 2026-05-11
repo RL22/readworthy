@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>HTML-First Agent Docs</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="readworthy.css" />
+</head>
+<body class="doc">
+<header class="doc-hero">
+<p class="eyebrow">Readworthy research brief</p>
+<h1>HTML-First Agent Docs</h1>
+<p class="lede">A compatibility-first argument for semantic HTML as the structured operational layer for AI, product, design, and agent documentation.</p>
+</header>
+<main class="prose">
+<section class="callout">
+<strong>Thesis:</strong> Markdown remains the ecosystem compatibility layer. HTML becomes the operational layer only when a document benefits from semantic structure, visual rendering, reusable components, validation, or progressive disclosure.
+</section>
+
+<h2>Why this proposal exists</h2>
+<p>Markdown won because it is portable, readable in raw form, Git-friendly, and easy for humans and models to scan. The problem is not Markdown itself. The problem is unstructured instructional prose that grows into bloated specs, repeated context, and hard-to-validate agent instructions.</p>
+<p><code>readworthy.css</code> proposes a disciplined middle path: keep required <code>.md</code> files where ecosystems expect them, but move high-structure operational material into lean, semantic HTML references.</p>
+
+<h2>The compatibility reality</h2>
+<table>
+<thead><tr><th>System</th><th>Current expectation</th><th>Implication</th></tr></thead>
+<tbody>
+<tr><td>Anthropic Agent Skills</td><td>A valid skill requires <code>SKILL.md</code> with YAML frontmatter and Markdown instructions.</td><td>HTML cannot replace the required entrypoint today.</td></tr>
+<tr><td>OpenAI Codex</td><td><code>AGENTS.md</code> gives Codex repository-level instructions before work begins.</td><td>Keep Markdown for routing and discovery.</td></tr>
+<tr><td>Design / product / brand specs</td><td>Teams commonly use <code>design.md</code>, <code>product.md</code>, <code>brand.md</code>, and related files as working specs.</td><td>HTML can supplement or become canonical when structure and presentation matter.</td></tr>
+</tbody>
+</table>
+
+<h2>Recommended architecture</h2>
+<pre><code>project/
+├── README.md                  # compatibility / repository discovery
+├── AGENTS.md                  # coding-agent routing
+├── SKILL.md                   # skill activation, when relevant
+├── install.md                 # setup fallback
+│
+├── docs/
+│   ├── index.html             # rich project overview
+│   ├── product.html           # canonical product spec, when justified
+│   ├── brand.html             # canonical brand spec, when visual examples matter
+│   ├── design.html            # visual design system / tokens / components
+│   ├── validation.html        # structured validation rules
+│   └── workflows.html         # operational workflows
+│
+└── assets/
+    └── readworthy.css            # render layer, not default agent context</code></pre>
+
+<section class="validation-rule">
+<h2>Anti-bloat rule</h2>
+<p><strong>Never load both a full Markdown document and its full HTML duplicate.</strong></p>
+<p>Markdown should route. HTML should operate. CSS should render.</p>
+</section>
+
+<h2>When HTML earns its keep</h2>
+<div class="card-grid">
+<section class="spec-card"><h3>Structured validation</h3><p>Use HTML when requirements should be grouped, labeled, filtered, or validated as discrete rules.</p></section>
+<section class="spec-card"><h3>Reusable components</h3><p>Use HTML for prompt blocks, spec cards, checklists, examples, warnings, and agent instructions.</p></section>
+<section class="spec-card"><h3>Visual fidelity</h3><p>Use HTML for design systems, brand guides, component previews, annotated examples, and rendered docs.</p></section>
+<section class="spec-card"><h3>Progressive disclosure</h3><p>Use HTML references only when the agent needs deeper operational detail for the task.</p></section>
+</div>
+
+<h2>When Markdown should stay</h2>
+<ul class="compact-list">
+<li><code>SKILL.md</code> when a skill host requires it.</li>
+<li><code>AGENTS.md</code> when a coding agent expects it for repo instructions.</li>
+<li><code>README.md</code>, <code>CHANGELOG.md</code>, <code>CONTRIBUTING.md</code>, and <code>LICENSE</code> where GitHub/package ecosystems expect Markdown or plain text.</li>
+<li>Short instructions that do not benefit from visual layout, semantic grouping, or validation.</li>
+</ul>
+
+<h2>Baseline: Anthropic PDF Skill</h2>
+<p>Anthropic’s public PDF skill is a useful benchmark because it is a real published skill with a required <code>SKILL.md</code>, detailed instructions, and additional references. GitHub reports the file as <strong>314 lines</strong> and <strong>7.88 KB</strong>.</p>
+
+<table>
+<thead><tr><th>Architecture</th><th>Default load</th><th>Estimated tokens</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>Current published skill</td><td>Full <code>SKILL.md</code></td><td>≈ 2,000 tokens</td><td>Based on 7.88 KB using a rough 4 chars/token estimate.</td></tr>
+<tr><td>Hybrid proposal</td><td>Tiny <code>SKILL.md</code> loader</td><td>≈ 150–300 tokens</td><td>Loads only routing, description, and when-to-open references.</td></tr>
+<tr><td>On-demand HTML reference</td><td><code>references/pdf.html</code> only for PDF tasks needing detail</td><td>Task-dependent</td><td>Useful only if the HTML reduces prose, groups rules, and avoids duplication.</td></tr>
+</tbody>
+</table>
+
+<section class="note"><strong>Important:</strong> Token savings are not automatic. HTML becomes efficient only when semantic structure replaces repeated explanation. If the system stores full Markdown plus full HTML duplicates, token usage gets worse.</section>
+
+<h2>Design principle</h2>
+<pre><code>.md   = compatibility, discovery, activation, routing
+.html = structured operational docs, when justified
+.css  = presentation only, never default agent context</code></pre>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://github.com/anthropics/skills/blob/main/skills/pdf/SKILL.md">Anthropic PDF Skill — SKILL.md</a></li>
+<li><a href="https://developers.openai.com/codex/guides/agents-md">OpenAI Codex — AGENTS.md guide</a></li>
+<li><a href="https://github.com/agentskills/agentskills/blob/main/docs/specification.mdx">Agent Skills specification</a></li>
+</ul>
+</main>
+</body>
+</html>

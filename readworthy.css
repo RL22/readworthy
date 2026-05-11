@@ -1,0 +1,224 @@
+:root {
+  --rw-bg: oklch(0.985 0.004 255);
+  --rw-fg: oklch(0.19 0.012 255);
+  --rw-muted: oklch(0.47 0.018 255);
+  --rw-border: oklch(0.86 0.012 255);
+  --rw-surface: oklch(0.955 0.008 255);
+  --rw-code-bg: oklch(0.21 0.018 255);
+  --rw-code-fg: oklch(0.94 0.008 255);
+  --rw-accent: oklch(0.52 0.14 255);
+  --rw-warn: oklch(0.58 0.16 62);
+  --rw-radius: 12px;
+  --rw-measure: 72ch;
+  --rw-font: ui-sans-serif, system-ui, sans-serif;
+  --rw-mono: ui-monospace, monospace;
+}
+
+body.doc {
+  background: var(--rw-bg);
+  color: var(--rw-fg);
+  font-family: var(--rw-font);
+  line-height: 1.65;
+  margin: 0;
+  padding: clamp(1rem, 4vw, 4rem);
+}
+
+.doc-hero,
+.prose,
+.toc {
+  max-width: var(--rw-measure);
+  margin-inline: auto;
+}
+
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-block: 2rem;
+}
+
+.toc a,
+.badge {
+  border: 1px solid var(--rw-border);
+  border-radius: 999px;
+  color: var(--rw-muted);
+  display: inline-block;
+  font-family: var(--rw-mono);
+  font-size: .78rem;
+  padding: .25rem .6rem;
+}
+
+.toc a:hover {
+  border-color: var(--rw-accent);
+  color: var(--rw-fg);
+}
+
+.eyebrow,
+.timestamp time {
+  color: var(--rw-accent);
+  font-family: var(--rw-mono);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.lede,
+.principle {
+  color: var(--rw-muted);
+  font-size: 1.12rem;
+}
+
+.principle strong {
+  color: var(--rw-fg);
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  line-height: 1.15;
+  margin-block: 2em .6em;
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose table,
+.prose pre {
+  margin-block: 1rem;
+}
+
+.prose section {
+  margin-block: 1.75rem;
+}
+
+.prose code {
+  background: var(--rw-surface);
+  border: 1px solid var(--rw-border);
+  border-radius: .35rem;
+  font-family: var(--rw-mono);
+  padding: .1rem .35rem;
+}
+
+.prose pre,
+.file-tree {
+  background: var(--rw-code-bg);
+  border-radius: var(--rw-radius);
+  color: var(--rw-code-fg);
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.prose pre code {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  display: block;
+  padding: 0;
+}
+
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.prose th,
+.prose td {
+  border-bottom: 1px solid var(--rw-border);
+  padding: .45rem .75rem .45rem 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.note,
+.callout,
+.warning,
+.example,
+.spec-card,
+.agent-instruction,
+.validation-rule,
+.timestamp {
+  border-top: 1px solid var(--rw-border);
+  padding-block: .75rem;
+}
+
+.note {
+  color: var(--rw-muted);
+}
+
+.warning {
+  color: var(--rw-warn);
+}
+
+.callout {
+  font-size: 1.05rem;
+}
+
+.example,
+.spec-card,
+.validation-rule,
+.prompt-block {
+  background: color-mix(in oklch, var(--rw-surface), transparent 45%);
+  border-radius: var(--rw-radius);
+  padding: 1rem;
+}
+
+.checklist {
+  list-style: none;
+  padding-left: 0;
+}
+
+.checklist li::before {
+  color: var(--rw-accent);
+  content: "✓ ";
+  font-weight: 700;
+}
+
+.file-tree,
+.prompt-block pre {
+  font-family: var(--rw-mono);
+  white-space: pre;
+}
+
+.prompt-block h3 {
+  margin-top: 0;
+}
+
+.agent-instruction {
+  font-family: var(--rw-mono);
+  font-size: .95rem;
+}
+
+.card-grid,
+.status-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.status {
+  border-radius: 999px;
+  display: inline-block;
+  font-family: var(--rw-mono);
+  font-size: .72rem;
+  padding: .2rem .55rem;
+}
+
+.supported {
+  background: color-mix(in oklch, var(--rw-accent), transparent 82%);
+  color: var(--rw-accent);
+}
+
+.partial,
+.neutral {
+  background: var(--rw-surface);
+  color: var(--rw-muted);
+}
+
+.required {
+  background: color-mix(in oklch, var(--rw-warn), transparent 82%);
+  color: var(--rw-warn);
+}
+
+.compact-list {
+  padding-left: 1.1rem;
+}
