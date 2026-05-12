@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Readworthy Site Map & IA Analysis</title>
+  <link rel="stylesheet" href="readworthy.css" />
+  <style>
+    .sitemap-tree {
+      font-family: var(--rw-mono);
+      background: var(--rw-surface);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--rw-border);
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    .tree-item {
+      padding: 0.5rem 0;
+      margin-left: 2rem;
+    }
+    .tree-item.root {
+      margin-left: 0;
+      font-weight: bold;
+      color: var(--rw-accent);
+    }
+    .tree-item.level-1 {
+      margin-left: 2rem;
+      color: var(--rw-fg);
+    }
+    .tree-item.level-2 {
+      margin-left: 4rem;
+      color: var(--rw-muted);
+      font-size: 0.9em;
+    }
+    .tree-connector {
+      color: var(--rw-border);
+    }
+    .issue {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0.25rem;
+    }
+    .opportunity {
+      background: #d1ecf1;
+      border-left: 4px solid #17a2b8;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0.25rem;
+    }
+    .rec {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0.25rem;
+    }
+    h3 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-summary {
+      background: var(--rw-surface);
+      padding: 1rem;
+      margin: 0.5rem 0;
+      border-left: 3px solid var(--rw-accent);
+      border-radius: 0.25rem;
+    }
+    .nav-matrix {
+      width: 100%;
+      font-size: 0.85em;
+      margin: 1rem 0;
+    }
+    .nav-matrix td {
+      padding: 0.5rem;
+      border: 1px solid var(--rw-border);
+    }
+    .nav-matrix th {
+      background: var(--rw-surface);
+      padding: 0.5rem;
+      text-align: left;
+      font-weight: bold;
+    }
+    .status-ok {
+      color: #28a745;
+    }
+    .status-warn {
+      color: #ffc107;
+    }
+    .status-bad {
+      color: #dc3545;
+    }
+  </style>
+</head>
+<body class="doc">
+
+<header class="doc-hero">
+  <p class="eyebrow">Site Architecture Analysis</p>
+  <h1>Readworthy Site Map</h1>
+  <p class="lede">
+    A comprehensive analysis of information architecture, navigation patterns, user journeys, and UX improvement opportunities.
+  </p>
+</header>
+
+<nav class="toc" aria-label="Navigation">
+  <a href="#current-structure">Current Structure</a>
+  <a href="#ia-analysis">IA Analysis</a>
+  <a href="#navigation-audit">Navigation Audit</a>
+  <a href="#user-journeys">User Journeys</a>
+  <a href="#issues">Issues & Gaps</a>
+  <a href="#recommendations">Recommendations</a>
+</nav>
+
+<main class="prose">
+
+<h2 id="current-structure">Current Site Structure</h2>
+
+<div class="sitemap-tree">
+<div class="tree-item root">📍 readworthy.github.io/readworthy</div>
+
+<div class="tree-item level-1">├── <a href="index.html">index.html</a> (Home / Landing)</div>
+<div class="tree-item level-2">│  ├── Tagline: "AI-native docs worth reading"</div>
+<div class="tree-item level-2">│  ├── Quick Start (CSS snippet)</div>
+<div class="tree-item level-2">│  └── 4 Card Grid linking to:</div>
+<div class="tree-item level-2">│     ├── Guide</div>
+<div class="tree-item level-2">│     ├── Output Example</div>
+<div class="tree-item level-2">│     ├── Research Brief</div>
+<div class="tree-item level-2">│     └── CLI Architecture</div>
+
+<div class="tree-item level-1">├── <a href="guide.html">guide.html</a> (Component Guide & Language Spec)</div>
+<div class="tree-item level-2">│  ├── Title: "Markdown-Flavored HTML"</div>
+<div class="tree-item level-2">│  ├── Sections:</div>
+<div class="tree-item level-2">│  │  ├── Why HTML (5 reasons)</div>
+<div class="tree-item level-2">│  │  ├── Styling Guidance</div>
+<div class="tree-item level-2">│  │  └── Components (base, document, output templates)</div>
+<div class="tree-item level-2">│  └── Links: Video summary example</div>
+
+<div class="tree-item level-1">├── <a href="video-summary.html">video-summary.html</a> (Output Example)</div>
+<div class="tree-item level-2">│  ├── Standalone rendered example</div>
+<div class="tree-item level-2">│  ├── AI-generated video summary using Readworthy</div>
+<div class="tree-item level-2">│  └── No navigation back to main site</div>
+
+<div class="tree-item level-1">├── <a href="html-first-agent-docs.html">html-first-agent-docs.html</a> (Research Brief)</div>
+<div class="tree-item level-2">│  ├── Title: "HTML-First Agent Docs Research"</div>
+<div class="tree-item level-2">│  ├── Thesis on why HTML for AI workflows</div>
+<div class="tree-item level-2">│  └── No navigation back to main site</div>
+
+<div class="tree-item level-1">├── <a href="caniuse-html-agent-docs.html">caniuse-html-agent-docs.html</a> (Compatibility Guide)</div>
+<div class="tree-item level-2">│  ├── Title: "Can I Use HTML-First Agent Docs?"</div>
+<div class="tree-item level-2">│  ├── Status matrix (14 file types)</div>
+<div class="tree-item level-2">│  ├── Compatibility guidance by use case</div>
+<div class="tree-item level-2">│  └── No navigation back to main site</div>
+
+<div class="tree-item level-1">├── <a href="cli-architecture.html">cli-architecture.html</a> (Architecture Reference)</div>
+<div class="tree-item level-2">│  ├── Title: "Readworthy CLI Architecture"</div>
+<div class="tree-item level-2">│  ├── Two-phase workflow (init → convert)</div>
+<div class="tree-item level-2">│  ├── Phase 1 & Phase 2 requirements</div>
+<div class="tree-item level-2">│  └── No navigation back to main site</div>
+
+<div class="tree-item level-1">└── <a href="readworthy-naming-brief.html">readworthy-naming-brief.html</a> (Naming Decision)</div>
+<div class="tree-item level-2">   ├── Title: "Readworthy Naming Decision Brief"</div>
+<div class="tree-item level-2">   ├── Naming rationale & history</div>
+<div class="tree-item level-2">   ├── Alignment with project goals</div>
+<div class="tree-item level-2">   └── No navigation back to main site</div>
+</div>
+
+<h2 id="ia-analysis">Information Architecture Analysis</h2>
+
+<section class="spec-card">
+  <h3>Current Model</h3>
+  <p><strong>Type:</strong> Hub-and-spoke with isolated pages</p>
+  <p>Home page (index) links outward to 6 standalone reference documents. Each standalone page is self-contained with no internal navigation back or between pages.</p>
+</section>
+
+<h3>Content Categories</h3>
+
+<table class="matrix">
+<thead>
+<tr>
+  <th>Category</th>
+  <th>Purpose</th>
+  <th>Pages</th>
+  <th>Audience</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Getting Started</strong></td>
+  <td>Onboarding, quick start, first impression</td>
+  <td>Home (index.html)</td>
+  <td>New users, curious visitors</td>
+</tr>
+<tr>
+  <td><strong>Learning & Guides</strong></td>
+  <td>Educational content, component reference, examples</td>
+  <td>Guide, Video-summary</td>
+  <td>Developers learning to use Readworthy</td>
+</tr>
+<tr>
+  <td><strong>Research & Philosophy</strong></td>
+  <td>Background, thesis, decision rationale</td>
+  <td>Research Brief, Naming Brief, CLI Architecture</td>
+  <td>Architects, decision-makers, curious researchers</td>
+</tr>
+<tr>
+  <td><strong>Reference & Decision Support</strong></td>
+  <td>Compatibility matrix, workflow specs, implementation details</td>
+  <td>Compatibility Matrix, CLI Architecture</td>
+  <td>Implementers, tool builders</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="navigation-audit">Navigation Audit</h2>
+
+<table class="nav-matrix">
+<thead>
+<tr>
+  <th>Page</th>
+  <th>Has TOC/Anchor Nav?</th>
+  <th>Links Back to Home?</th>
+  <th>Links to Other Pages?</th>
+  <th>Breadcrumbs?</th>
+  <th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>index.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">—</td>
+  <td class="status-ok">✓ (6 links)</td>
+  <td class="status-bad">✗</td>
+  <td>Hub</td>
+</tr>
+<tr>
+  <td>guide.html</td>
+  <td class="status-ok">✓ (internal anchors)</td>
+  <td class="status-bad">✗</td>
+  <td class="status-warn">Partial (1 link to video-summary)</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-warn">Stranded</span></td>
+</tr>
+<tr>
+  <td>video-summary.html</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-bad">Isolated</span></td>
+</tr>
+<tr>
+  <td>html-first-agent-docs.html</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-bad">Isolated</span></td>
+</tr>
+<tr>
+  <td>caniuse-html-agent-docs.html</td>
+  <td class="status-ok">✓ (matrix headers)</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-bad">Isolated</span></td>
+</tr>
+<tr>
+  <td>cli-architecture.html</td>
+  <td class="status-ok">✓ (internal headings)</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-bad">Isolated</span></td>
+</tr>
+<tr>
+  <td>readworthy-naming-brief.html</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-bad">Isolated</span></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="user-journeys">User Journeys & Flows</h2>
+
+<h3>Journey 1: "I want to learn how to use Readworthy"</h3>
+<p><strong>Current path:</strong> Home → Guide → (stuck, no clear next step)</p>
+<div class="issue">
+  <strong>Problem:</strong> After reading the guide, user has no context on when/how to apply it. No link to compatibility matrix, CLI reference, or back to home.
+</div>
+
+<h3>Journey 2: "I want to understand the philosophy"</h3>
+<p><strong>Current path:</strong> Home → Research Brief → (stranded)</p>
+<div class="issue">
+  <strong>Problem:</strong> Each research/reference page is isolated. No way to navigate between related concepts (e.g., from Research Brief to Naming Brief to CLI Architecture).
+</div>
+
+<h3>Journey 3: "I want to decide if Readworthy fits my use case"</h3>
+<p><strong>Current path:</strong> Home → Compatibility Matrix → (stuck)</p>
+<div class="issue">
+  <strong>Problem:</strong> Compatibility matrix is thorough but disconnected from decision-making context (research, examples, guides). Hard to move from "should we use this?" to "how do we use it?"
+</div>
+
+<h3>Journey 4: "I want to implement the CLI"</h3>
+<p><strong>Current path:</strong> Home → CLI Architecture → (stuck, no implementation guide)</p>
+<div class="issue">
+  <strong>Problem:</strong> Architecture doc exists but no implementation guide, code examples, or integration instructions.
+</div>
+
+<h2 id="issues">Issues & Gaps</h2>
+
+<section class="issue">
+  <h3>1. Pages are isolated (no internal cross-links)</h3>
+  <p>Each page is self-contained. There's no way to navigate between guide, research, and reference without returning to home. This breaks exploration and discovery.</p>
+</section>
+
+<section class="issue">
+  <h3>2. No breadcrumb navigation</h3>
+  <p>Users don't know their location in the site hierarchy or how to navigate back except by browser back button.</p>
+</section>
+
+<section class="issue">
+  <h3>3. Unclear information hierarchy</h3>
+  <p>It's not obvious which pages are "getting started," "learning," "reference," or "philosophy." Content categories are implicit, not explicit.</p>
+</section>
+
+<section class="issue">
+  <h3>4. No clear learning path</h3>
+  <p>Optimal learning order might be: Home → Naming/Philosophy → Research Brief → Guide → Compatibility → CLI. But nothing suggests this path.</p>
+</section>
+
+<section class="issue">
+  <h3>5. Video-summary is an orphan</h3>
+  <p>Standalone example with no context, no return link, no indication of what it demonstrates or why it matters.</p>
+</section>
+
+<section class="issue">
+  <h3>6. No section headers or grouping</h3>
+  <p>The home page has 6 independent cards. No categories like "Learn," "Explore Philosophy," "Reference Docs" to set expectations.</p>
+</section>
+
+<section class="issue">
+  <h3>7. No search or index</h3>
+  <p>Six separate pages with no way to search or index content across the site.</p>
+</section>
+
+<section class="issue">
+  <h3>8. Incomplete navigation in index.html</h3>
+  <p>Home page doesn't link to all pages (Naming Brief is missing from top-level navigation).</p>
+</section>
+
+<h2 id="recommendations">Recommendations for Improvement</h2>
+
+<h3>Priority 1: Fix Navigation (Quick wins)</h3>
+
+<section class="rec">
+  <h3>1.1 Add breadcrumb navigation to all pages</h3>
+  <p>Each page should show: <code>Home / [Category] / [Page Title]</code></p>
+  <p><strong>Why:</strong> Users know where they are and can jump back to category or home.</p>
+</section>
+
+<section class="rec">
+  <h3>1.2 Add "Back to Home" footer link on all pages</h3>
+  <p>Every page needs at least one way back to index.html.</p>
+  <p><strong>Why:</strong> Users shouldn't be stranded.</p>
+</section>
+
+<section class="rec">
+  <h3>1.3 Add internal cross-links by category</h3>
+  <p>Example: At the end of Guide, add "Related: Compatibility Matrix, Video Example"</p>
+  <p><strong>Why:</strong> Helps users discover related content without returning home.</p>
+</section>
+
+<section class="rec">
+  <h3>1.4 Update index.html navigation to include all 6 pages</h3>
+  <p>Currently missing Naming Brief from main nav. Add it or reorganize.</p>
+  <p><strong>Why:</strong> Consistency and completeness.</p>
+</section>
+
+<h3>Priority 2: Improve Information Architecture</h3>
+
+<section class="rec">
+  <h3>2.1 Reorganize home page with category headers</h3>
+  <p>Group cards into sections:</p>
+  <pre><code>START HERE
+├── Guide (learn to use)
+├── Example (see it working)
+
+UNDERSTAND THE CONCEPT
+├── Philosophy/Research
+├── Naming Brief
+├── Compatibility Matrix
+
+IMPLEMENT
+├── CLI Architecture</code></pre>
+  <p><strong>Why:</strong> Makes purpose of each page clear and guides user flow.</p>
+</section>
+
+<section class="rec">
+  <h3>2.2 Create a learning path / guided tour</h3>
+  <p>Add optional "Learning Path" on home with recommended reading order:</p>
+  <ol>
+    <li>What is Readworthy? (Home)</li>
+    <li>Why does this matter? (Naming Brief → Research Brief)</li>
+    <li>When should I use it? (Compatibility Matrix)</li>
+    <li>How do I use it? (Guide → Example)</li>
+    <li>How do I build it? (CLI Architecture)</li>
+  </ol>
+  <p><strong>Why:</strong> Guides users through optimal discovery without forcing it.</p>
+</section>
+
+<section class="rec">
+  <h3>2.3 Add section landing pages (optional enhancement)</h3>
+  <p>For advanced users, create intermediate hubs:</p>
+  <ul>
+    <li><code>learn.html</code> - Guide + examples + best practices</li>
+    <li><code>reference.html</code> - Compatibility, CLI, decision matrices</li>
+    <li><code>research.html</code> - Philosophy, naming, thesis</li>
+  </ul>
+  <p><strong>Why:</strong> Reduces cognitive load for users with specific goals.</p>
+</section>
+
+<h3>Priority 3: Improve Video-Summary Page</h3>
+
+<section class="rec">
+  <h3>3.1 Add header/context to video-summary.html</h3>
+  <p>Currently it's a bare example. Add:</p>
+  <ul>
+    <li>Page title and brief explanation of what this example demonstrates</li>
+    <li>Navigation back to home / guide</li>
+    <li>Related examples or next steps</li>
+  </ul>
+  <p><strong>Why:</strong> Users understand context and can navigate onward.</p>
+</section>
+
+<h3>Priority 4: Enhance Home Page UX</h3>
+
+<section class="rec">
+  <h3>4.1 Add a quick "What is Readworthy?" explainer section above cards</h3>
+  <p>Current layout jumps into navigation. Add context first:</p>
+  <pre><code>TITLE: AI-native docs worth reading
+
+EXPLAINER:
+Readworthy is a documentation framework for turning bloated,
+repetitive AI-generated text into structured, readable documents
+for both humans and AI agents.
+
+[View live site →]
+
+EXPLORE:
+[cards with categories]</code></pre>
+</section>
+
+<section class="rec">
+  <h3>4.2 Add a "Popular Paths" section</h3>
+  <p>Show quick links for common questions:</p>
+  <ul>
+    <li>"I want to learn Readworthy" → Guide</li>
+    <li>"Should I use HTML or Markdown?" → Compatibility</li>
+    <li>"I want to understand the philosophy" → Research Brief</li>
+    <li>"I want to build the CLI" → CLI Architecture</li>
+  </ul>
+</section>
+
+<section class="rec">
+  <h3>4.3 Add a footer with all links + sitemap</h3>
+  <p>Every page should have footer with:</p>
+  <ul>
+    <li>All page links organized by category</li>
+    <li>Social links (GitHub, etc.)</li>
+    <li>Link to this sitemap</li>
+  </ul>
+</section>
+
+<h3>Priority 5: Add Global Navigation</h3>
+
+<section class="rec">
+  <h3>5.1 Add sticky header with site logo + main nav</h3>
+  <p>Every page should have consistent header with:</p>
+  <ul>
+    <li>Readworthy logo/home link</li>
+    <li>Main navigation: Home, Guide, Reference, Research</li>
+    <li>Search (optional future enhancement)</li>
+  </ul>
+  <p><strong>Why:</strong> Users can navigate without clicking back.</p>
+</section>
+
+<h2>Suggested New Site Structure (Post-Improvements)</h2>
+
+<div class="sitemap-tree">
+<div class="tree-item root">📍 readworthy.github.io/readworthy</div>
+
+<div class="tree-item level-1">├── <a href="index.html">index.html</a> (Home with section organization)</div>
+
+<div class="tree-item level-1">├── LEARN (Section)</div>
+<div class="tree-item level-2">│  ├── <a href="guide.html">guide.html</a> (Component Guide)</div>
+<div class="tree-item level-2">│  └── <a href="video-summary.html">video-summary.html</a> (Example)</div>
+
+<div class="tree-item level-1">├── UNDERSTAND (Section)</div>
+<div class="tree-item level-2">│  ├── <a href="readworthy-naming-brief.html">readworthy-naming-brief.html</a> (Why the name?)</div>
+<div class="tree-item level-2">│  ├── <a href="html-first-agent-docs.html">html-first-agent-docs.html</a> (Why HTML?)</div>
+<div class="tree-item level-2">│  └── <a href="caniuse-html-agent-docs.html">caniuse-html-agent-docs.html</a> (When to use?)</div>
+
+<div class="tree-item level-1">├── REFERENCE (Section)</div>
+<div class="tree-item level-2">│  └── <a href="cli-architecture.html">cli-architecture.html</a> (Implementation Guide)</div>
+
+<div class="tree-item level-1">└── <a href="sitemap.html">sitemap.html</a> (This page)</div>
+</div>
+
+<section class="spec-card">
+  <h3>Implementation Strategy</h3>
+  <ol>
+    <li><strong>Phase 1 (Quick):</strong> Add breadcrumbs, back links, footer with all links (1-2 hours)</li>
+    <li><strong>Phase 2 (Medium):</strong> Reorganize home page with section headers and learning path (1-2 hours)</li>
+    <li><strong>Phase 3 (Nice-to-have):</strong> Add sticky header nav, enhance video-summary context (2-3 hours)</li>
+    <li><strong>Phase 4 (Future):</strong> Create section landing pages if site grows (TBD)</li>
+  </ol>
+</section>
+
+</main>
+
+</body>
+</html>
