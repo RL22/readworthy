@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Native Workflow Builders — Research Brief</title>
+  <link rel="stylesheet" href="../readworthy.css" />
+</head>
+<body class="doc">
+
+<nav class="toc site-nav" aria-label="Site navigation" style="margin-bottom: 0;">
+  <a href="../index.html">← Readworthy</a>
+  <a href="../guide.html">Guide</a>
+  <a href="../examples/">Examples</a>
+  <a href="../caniuse-html-agent-docs.html">Compatibility</a>
+  <a href="https://github.com/RL22/readworthy">GitHub</a>
+</nav>
+
+<header class="doc-hero">
+  <p class="eyebrow">Research Brief</p>
+  <h1>AI-Native Workflow Builders</h1>
+  <p class="lede">A 3-week competitive scan for Workflow Labs, May 2026. Covers Zapier, Make, n8n, Notion AI, Relay, and Lindy across seven capability dimensions.</p>
+</header>
+
+<nav class="toc" aria-label="Document outline">
+  <a href="#executive-summary">Executive Summary</a>
+  <a href="#feature-matrix">Feature Matrix</a>
+  <a href="#profiles">Competitor Profiles</a>
+  <a href="#evaluation-criteria">Evaluation Criteria</a>
+  <a href="#positioning">Where Workflow Labs Fits</a>
+  <a href="#risks">Risks</a>
+  <a href="#recommendations">Recommendations</a>
+  <a href="#sources">Research Sources</a>
+</nav>
+
+<main class="prose">
+
+<section class="callout" id="executive-summary">
+  <p><strong>Executive Summary —</strong> The AI-native workflow automation space is fragmenting into two distinct categories: legacy integration platforms (Zapier, Make) adding AI features as afterthoughts, and AI-first tools (Relay, Lindy) built for orchestration from the ground up. No tool in the market provides AI-native multi-step error recovery with a structured human-in-the-loop UX. This is Workflow Labs' open lane.</p>
+</section>
+
+<p class="principle"><strong>The "automation" category is fragmenting</strong> into integrations (Zapier/Make) and AI orchestration (Relay/Lindy). Workflow Labs should build for the second category and avoid being priced into the first.</p>
+
+<h2 id="feature-matrix">Feature Matrix</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Zapier</th>
+      <th>Make</th>
+      <th>n8n</th>
+      <th>Notion AI</th>
+      <th>Relay</th>
+      <th>Lindy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AI-generated workflow steps</td>
+      <td><span class="status partial">Partial</span></td>
+      <td><span class="status partial">Partial</span></td>
+      <td><span class="status partial">Partial</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status supported">Supported</span></td>
+      <td><span class="status supported">Supported</span></td>
+    </tr>
+    <tr>
+      <td>Human-in-the-loop approval</td>
+      <td><span class="status supported">Supported</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status partial">Partial</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status supported">Supported</span></td>
+      <td><span class="status supported">Supported</span></td>
+    </tr>
+    <tr>
+      <td>Natural language trigger</td>
+      <td><span class="status partial">Partial</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status supported">Supported</span></td>
+      <td><span class="status partial">Partial</span></td>
+      <td><span class="status supported">Supported</span></td>
+    </tr>
+    <tr>
+      <td>Multi-agent orchestration</td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status partial">Partial</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status partial">Partial</span></td>
+      <td><span class="status supported">Supported</span></td>
+    </tr>
+    <tr>
+      <td>Error recovery via AI</td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status partial">Partial</span></td>
+      <td><span class="status partial">Partial</span></td>
+    </tr>
+    <tr>
+      <td>Self-hosted / on-premise</td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status supported">Supported</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+    </tr>
+    <tr>
+      <td>Free tier</td>
+      <td><span class="status supported">Supported</span></td>
+      <td><span class="status supported">Supported</span></td>
+      <td><span class="status supported">Supported</span></td>
+      <td><span class="status partial">Partial</span></td>
+      <td><span class="status partial">Partial</span></td>
+      <td><span class="status neutral">Neutral</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<aside class="note">
+  <p>Ratings based on public documentation, product trials, and changelog review as of May 2026. Relay and Lindy are releasing rapidly — verify before citing.</p>
+</aside>
+
+<h2 id="profiles">Competitor Profiles</h2>
+
+<section class="spec-card">
+  <span class="badge">Market Leader</span>
+  <h3>Zapier</h3>
+  <p>7,000+ integrations, 2M+ users. Zapier added "AI-suggested steps" in late 2024 but these generate starting templates, not executable decisions. The core product is still trigger-action pairs. AI is a feature, not the architecture.</p>
+  <p>Strengths: deepest integration library, enterprise compliance (SOC 2, HIPAA), strong no-code UX. Gaps: no multi-agent support, static error handling (retry or fail), AI features feel bolted on.</p>
+  <ul class="checklist">
+    <li>7,000+ app integrations</li>
+    <li>SOC 2 Type II, HIPAA compliant</li>
+    <li>Zaps run in seconds, not minutes</li>
+    <li>AI-suggested steps (template generation only)</li>
+  </ul>
+</section>
+
+<section class="spec-card">
+  <span class="badge">Power Users</span>
+  <h3>Make (Integromat)</h3>
+  <p>Visual canvas for complex multi-step workflows. The power user's Zapier — more flexible, steeper learning curve. AI modules were added in 2025 but serve as content generation tools (summarize text, classify emails), not orchestration logic.</p>
+  <p>Strengths: visual scenario builder, complex branching logic, competitive pricing. Gaps: AI is content-in, content-out rather than decision-making. No HITL approval gates.</p>
+  <ul class="checklist">
+    <li>Complex multi-step workflow canvas</li>
+    <li>3,500+ app integrations</li>
+    <li>Advanced conditional branching</li>
+    <li>AI modules for text processing only</li>
+  </ul>
+</section>
+
+<section class="spec-card">
+  <span class="badge">Open Source</span>
+  <h3>n8n</h3>
+  <p>Self-hostable, developer-first automation with 400+ integrations. The only major player with a genuine self-hosting option, making it the default for regulated industries and data-residency requirements. AI nodes added in v1.0 but require manual configuration.</p>
+  <p>Strengths: self-hosting, source-available license, active community, code nodes for arbitrary logic. Gaps: setup complexity is high, AI nodes are not intelligent (they call APIs, they don't orchestrate), no HITL UX.</p>
+  <ul class="checklist">
+    <li>Full self-hosting capability</li>
+    <li>Source-available under Fair Code license</li>
+    <li>Code nodes for custom logic</li>
+    <li>400+ integrations, growing community</li>
+  </ul>
+</section>
+
+<section class="spec-card">
+  <span class="badge">Document-native</span>
+  <h3>Notion AI</h3>
+  <p>AI embedded in a document surface rather than a workflow engine. Notion AI excels at generating and summarizing content within pages but has no workflow orchestration to speak of. "Automations" in Notion are database triggers that run simple actions.</p>
+  <p>Strengths: natural language interaction, strong for knowledge work, tight integration with existing Notion databases. Gaps: not a workflow tool. Cannot model multi-step processes, approval gates, or error states.</p>
+  <ul class="checklist">
+    <li>Natural language interaction</li>
+    <li>Native Notion database triggers</li>
+    <li>AI-assisted content generation</li>
+    <li>Limited to simple automation chains</li>
+  </ul>
+</section>
+
+<section class="spec-card">
+  <span class="badge">Emerging</span>
+  <h3>Relay.app</h3>
+  <p>The closest current competitor to Workflow Labs' vision. Relay is built around "human-in-the-loop" as a first-class concept — workflows can pause for human approval at any step. AI is used for step generation and content within steps, but error recovery is still static.</p>
+  <p>Strengths: genuine HITL UX, clean product design, raised $15M Series A (Q1 2026). Gaps: AI cannot reason about mid-workflow failures. Step generation is template-based, not decision-based.</p>
+  <ul class="checklist">
+    <li>Human-in-the-loop as core design</li>
+    <li>1,500+ integrations</li>
+    <li>Raised $15M Series A (Q1 2026)</li>
+    <li>Approval steps at any workflow point</li>
+  </ul>
+</section>
+
+<section class="spec-card">
+  <span class="badge">AI-first</span>
+  <h3>Lindy</h3>
+  <p>The most AI-native of the six. Lindy agents run autonomous workflows from natural language instructions. Multi-agent support exists but is early. Raised $10M (Q1 2026). Moving fast on all dimensions — this is the highest velocity competitor.</p>
+  <p>Strengths: strongest AI orchestration, natural language workflow definition, multi-agent support. Gaps: no self-hosting, limited integration library vs. Zapier/Make, HITL is present but not the design center.</p>
+  <ul class="checklist">
+    <li>Natural language workflow definition</li>
+    <li>Multi-agent orchestration</li>
+    <li>Raised $10M (Q1 2026)</li>
+    <li>40 new integrations per month (current velocity)</li>
+  </ul>
+</section>
+
+<section class="warning">
+  <h3>Watch Relay and Lindy closely</h3>
+  <p>Both raised in Q1 2026. Relay's roadmap (referenced in a TechCrunch article, April 2026) includes AI-generated workflows with HITL steps. Their current gap — AI reasoning about errors — could close within 2 quarters. Lindy is expanding its integration library at roughly 40 new integrations per month.</p>
+</section>
+
+<h2 id="evaluation-criteria">Evaluation Criteria</h2>
+
+<section class="validation-rule">
+  <h3>AI orchestration depth</h3>
+  <p>A tool qualifies as AI-native only if AI can generate, modify, and debug workflow steps without human reconstruction. Generating a starting template (Zapier AI) does not qualify. Executing a multi-step decision chain from natural language (Lindy) does.</p>
+</section>
+
+<section class="validation-rule">
+  <h3>Human-in-the-loop UX</h3>
+  <p>The tool must support explicit pause-and-approve steps within a running workflow, not just pre-run review. A workflow that shows a diff before running (Make) is not HITL. A workflow that halts mid-execution and routes to a human for a decision (Relay) is.</p>
+</section>
+
+<section class="validation-rule">
+  <h3>Multi-step error recovery</h3>
+  <p>The tool must be able to reason about a mid-workflow failure and propose a path forward without full workflow restart. Static retry logic (Zapier, Make) does not qualify. Partial reasoning about the error state with a recovery proposal (Lindy, partially) is the bar.</p>
+</section>
+
+<h2 id="positioning">Where Workflow Labs Fits</h2>
+
+<p class="principle"><strong>The differentiator is not the number of integrations.</strong> It is the quality of the error recovery loop. Every mature workflow fails eventually — the question is how gracefully.</p>
+
+<section class="card-grid">
+  <section class="spec-card">
+    <span class="badge">Differentiator</span>
+    <h3>AI-native error recovery</h3>
+    <p>No current tool can reason about a mid-workflow failure and propose a recovery path. This is the gap Workflow Labs is built to close.</p>
+  </section>
+
+  <section class="spec-card">
+    <span class="badge">Differentiator</span>
+    <h3>Structured HITL as design center</h3>
+    <p>HITL is a feature in Relay. In Workflow Labs, it is the architecture — every workflow is designed around human decision points, not despite them.</p>
+  </section>
+
+  <section class="spec-card">
+    <span class="badge">Advantage</span>
+    <h3>Building at the right moment</h3>
+    <p>Relay and Lindy are proving the market. Enterprise buyers are evaluating AI-native automation now. Workflow Labs can enter a market with demonstrated demand and a clear gap to fill.</p>
+  </section>
+
+  <section class="spec-card">
+    <span class="badge">Advantage</span>
+    <h3>Error recovery as a wedge</h3>
+    <p>Lead with the scenario every enterprise automation team has experienced: the workflow that fails at step 7 of 12 at 2 AM. Workflow Labs is the product that knows what to do next.</p>
+  </section>
+</section>
+
+<section class="callout">
+  <p><strong>The open lane:</strong> No tool in the market provides AI-native multi-step error recovery with a structured HITL UX. Zapier and Make use static retry logic. n8n exposes error nodes but requires human configuration. Lindy and Relay are closest but lack the approval-gate UX. This is Workflow Labs' to build.</p>
+</section>
+
+<h2 id="risks">Risks</h2>
+
+<section class="warning">
+  <h3>Relay and Lindy are moving fast</h3>
+  <p>Both raised in Q1 2026 and are releasing rapidly. If Relay ships AI-generated workflows with HITL steps (their leaked roadmap), their gap vs. Workflow Labs narrows significantly. Speed of execution is a strategic risk.</p>
+</section>
+
+<aside class="note">
+  <p>Zapier and Make have distribution advantages that are difficult to close on integrations alone. Workflow Labs should not compete on integration count — target the enterprise buyer who has already outgrown Zapier and is evaluating AI-native alternatives.</p>
+</aside>
+
+<ul class="checklist">
+  <li>Validate error recovery UX with 5 enterprise buyers before public launch</li>
+  <li>Monitor Relay and Lindy release notes weekly</li>
+  <li>Avoid pricing into the Zapier/Make tier — position at 2× their enterprise pricing</li>
+  <li>Publish integration roadmap early to set expectations on library growth</li>
+</ul>
+
+<h2 id="recommendations">Recommendations</h2>
+
+<ul class="checklist">
+  <li>Lead with the 2 AM workflow failure scenario in all sales conversations — this is the pain point no current tool solves</li>
+  <li>Target operations teams at Series B+ companies with 5+ person automation workflows — they have the pain and the budget</li>
+  <li>Do not compete on integration count in year 1. Depth of AI orchestration and error recovery is the wedge</li>
+  <li>Publish a public roadmap with integration library targets — buyers are evaluating build vs. buy, and uncertainty about library growth is a blocker</li>
+  <li>Time the Series B to Q4 2026 — after Relay and Lindy's next releases clarify the competitive map</li>
+</ul>
+
+<p class="principle"><strong>The open lane closes.</strong> Build the product that every enterprise automation team wishes existed at 2 AM when the workflow fails at step 7.</p>
+
+<h2 id="sources">Research Sources</h2>
+
+<section class="prompt-block">
+  <h3>Prompt used to generate this brief</h3>
+  <pre>You are a competitive analyst. Produce a structured research brief on AI-native workflow automation tools for a pre-launch startup building in this space. Cover the top 6 competitors across seven capability dimensions. Include a feature matrix with status ratings, competitor profiles, evaluation criteria, positioning analysis, risk assessment, and actionable recommendations. The client is Workflow Labs, a pre-launch AI-native automation startup. Format as structured Readworthy HTML.</pre>
+</section>
+
+<pre class="file-tree">research/
+├── sources/
+│   ├── zapier-pricing-may2026.md
+│   ├── make-feature-list.md
+│   ├── n8n-roadmap-github.md
+│   ├── relay-techcrunch-apr2026.md
+│   ├── lindy-docs.md
+│   └── notion-ai-changelog.md
+├── trials/
+│   ├── zapier-trial-notes.md
+│   ├── relay-trial-notes.md
+│   └── lindy-trial-notes.md
+└── brief-prompt.md</pre>
+
+<aside class="note">
+  <p>Data collected via public documentation, product trials, changelog review, and secondary sources. Pricing and feature data accurate as of May 2026. Verify before citing in external materials.</p>
+</aside>
+
+</main>
+
+<footer style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--rw-border); max-width: var(--rw-measure); margin-inline: auto;">
+  <p style="font-family: var(--rw-mono); font-size: 0.8rem; color: var(--rw-muted);">
+    <strong>Learn:</strong> <a href="../guide.html">Guide</a> · <a href="video-summary.html">Example</a> ·
+    <strong>Understand:</strong> <a href="../research/html-first-agent-docs.html">Why HTML</a> · <a href="../research/readworthy-naming-brief.html">Naming</a> · <a href="thread-archive.html">Industry Signal</a> · <a href="research-brief.html">Research</a> · <a href="../caniuse-html-agent-docs.html">Compatibility</a> ·
+    <strong>Planned:</strong> <a href="architecture-spec.html">CLI Spec</a> ·
+    <a href="../research/sitemap.html">Site Map</a>
+  </p>
+  <p style="font-family: var(--rw-mono); font-size: 0.75rem; color: var(--rw-muted);">A <a href="https://sprintz.agency">Sprintz</a> project.</p>
+</footer>
+
+</body>
+</html>

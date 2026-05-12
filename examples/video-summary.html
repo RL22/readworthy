@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Video Summary Example</title>
+  <title>Rethinking How We Build — Maggie Chen at Structconf 2024</title>
   <link rel="stylesheet" href="../readworthy.css" />
 </head>
 <body class="doc">
@@ -11,95 +11,161 @@
 <nav class="toc site-nav" aria-label="Site navigation" style="margin-bottom: 0;">
   <a href="../index.html">← Readworthy</a>
   <a href="../guide.html">Guide</a>
-  <a href="../examples/" aria-current="page">Example</a>
+  <a href="../examples/">Examples</a>
   <a href="../caniuse-html-agent-docs.html">Compatibility</a>
-  <a href="cli-architecture.html">CLI</a>
+  <a href="https://github.com/RL22/readworthy">GitHub</a>
 </nav>
 
 <header class="doc-hero">
-  <p class="eyebrow">Output Example</p>
-  <h1>Video Summary</h1>
-  <p class="lede">
-    A standalone example of AI-generated transcript notes rendered as semantic
-    HTML with readworthy.css.
-  </p>
+  <p class="eyebrow">Video Summary</p>
+  <h1>Rethinking How We Build</h1>
+  <p class="lede">Maggie Chen, Structconf 2024 · 42:17 · 84K views · AI-generated summary</p>
 </header>
 
 <nav class="toc" aria-label="Table of contents">
-  <a href="../index.html">← Home</a>
-  <a href="../guide.html">Guide</a>
-  <a href="#summary">Summary</a>
+  <a href="#tldr">TL;DR</a>
   <a href="#timestamps">Timestamps</a>
+  <a href="#key-ideas">Key Ideas</a>
+  <a href="#takeaways">Takeaways</a>
 </nav>
 
 <main class="prose">
 
-<section id="summary" class="spec-card">
-  <h2>Summary</h2>
-  <p>
-    The discussion argues that Markdown remains useful for writing, but HTML is
-    a better source format once AI-generated text needs structure, styling,
-    validation, and reuse.
-  </p>
-  <p>
-    The recommended direction is Markdown-flavored HTML: readable source,
-    semantic tags, reusable classes, and a lightweight stylesheet.
-  </p>
+<section id="tldr" class="callout">
+  <strong>TL;DR —</strong> Teams using AI to generate docs produce volume without improving shared understanding. The problem isn't the AI output — it's that specs become write-optimized contracts nobody re-reads. Chen's solution: structure docs for scanning, not reading, and separate Generate / Distill / Operate phases in your writing workflow.
 </section>
+
+<p class="principle">
+  <strong>The curator's trap:</strong> A spec document is write-optimized by default. The curator adds detail that made sense when writing. The reader needs detail that makes sense for their task. These are not the same document.
+</p>
 
 <h2 id="timestamps">Timestamps</h2>
 
 <section class="timestamp">
+  <span class="badge">Context</span>
   <time>00:00</time>
-  <h3>Markdown workflow fatigue</h3>
-  <p>
-    The discussion opens by questioning whether Markdown is still the ideal
-    source format for AI-assisted workflows.
+  <h3>The gap nobody names</h3>
+  <p>Chen opens by asking the room how many people have a spec document longer than 50 pages. Every hand goes up. She asks how many have read it in the last week. Two hands.</p>
+  <aside class="note">
+    She returns to this image at 38:45 — asking what would change if the doc was structured so the answer was always "yesterday."
+  </aside>
+</section>
+
+<section class="timestamp">
+  <span class="badge">Diagnosis</span>
+  <time>04:20</time>
+  <h3>How specs fail without anyone noticing</h3>
+  <p>Her diagnosis: the problem is not length — it's that spec docs are write-optimized, not read-optimized. She calls this "the curator's trap." The person writing the spec adds every detail that mattered to them; the person reading it needs only the details relevant to their task.</p>
+  <p class="principle">
+    <strong>Write-optimized docs:</strong> useful at creation time. Read-optimized docs: useful at decision time. AI generates the first kind by default.
   </p>
 </section>
 
 <section class="timestamp">
-  <time>02:00</time>
-  <h3>HTML as a source artifact</h3>
-  <p>
-    HTML allows richer semantics, layout control, reusable components, and
-    design-aware generation.
+  <span class="badge">Pattern</span>
+  <time>09:15</time>
+  <h3>The spec-as-contract</h3>
+  <p>When teams treat an AI-generated doc as a binding source of truth, they stop questioning it. Chen calls this the spec-as-contract pattern — the document stops being a surface to think with and becomes a wall to stand behind.</p>
+  <p class="principle">
+    <strong>The document stopped being a surface to think with.</strong> It became a wall to stand behind.
   </p>
 </section>
 
 <section class="timestamp">
-  <time>06:00</time>
-  <h3>Design systems and reusable docs</h3>
-  <p>
-    Structured HTML enables more scalable documentation systems and easier
-    agent transformations.
+  <span class="badge">Framework</span>
+  <time>14:40</time>
+  <h3>Three modes of AI-assisted writing</h3>
+  <p>Chen introduces a framework for thinking about where AI belongs in a documentation workflow. Most teams use only the first mode.</p>
+  <ul class="checklist">
+    <li><strong>Generate</strong> — AI produces a first draft from a brief, meeting notes, or a prompt. Fast, often comprehensive, consistently missing the reader's perspective.</li>
+    <li><strong>Distill</strong> — AI reorganizes and compresses existing content into a navigable structure. This is where most of the value is, and most teams skip it.</li>
+    <li><strong>Operate</strong> — the document becomes a living reference surface that agents and humans navigate task-first, not sequentially.</li>
+  </ul>
+</section>
+
+<section class="timestamp">
+  <span class="badge">Demo</span>
+  <time>20:05</time>
+  <h3>Foundry's doc pipeline live</h3>
+  <p>Chen demos Foundry's internal document pipeline — a 180-page AI-generated spec refactored into a set of structured HTML artifacts with navigation, progressive disclosure, and role-specific views. The audience applauds the diff: 180 pages becomes 12 structured artifacts averaging 900 words each.</p>
+  <aside class="note">
+    Foundry's doc pipeline is an internal tool and is not publicly available. The HTML component system used in the demo uses semantic classes similar to the Readworthy vocabulary.
+  </aside>
+</section>
+
+<section class="timestamp">
+  <span class="badge">Risk</span>
+  <time>26:30</time>
+  <h3>The feedback loop problem</h3>
+  <p>Chen argues that the solution is to eliminate the single-source spec entirely and replace it with a graph of smaller, linked artifacts — each owned by the team closest to it, each structured for scanning.</p>
+  <section class="warning">
+    <h3>The contested claim</h3>
+    <p>An audience member from a financial services firm pushed back hard: compliance requires single-document audit trails. Chen acknowledged this is a real constraint and said she should have qualified the claim — regulated industries cannot adopt this pattern without legal review.</p>
+  </section>
+</section>
+
+<section class="timestamp">
+  <span class="badge">Solution</span>
+  <time>32:10</time>
+  <h3>What good looks like</h3>
+  <p>Chen shows examples of scan-first documents: short, structured, heavily navigated. The reading time on these docs is under 3 minutes. Decision time — the time from opening the doc to making a choice — drops by roughly 60% in Foundry's internal measurement.</p>
+  <p class="principle">
+    <strong>Scannable is a form of respect</strong> for the reader's time. It signals that you expect them to have other things to do.
   </p>
 </section>
 
 <section class="timestamp">
-  <time>10:00</time>
-  <h3>The future</h3>
-  <p>
-    Markdown-flavored HTML may become the ideal middle ground for modern
-    AI-native publishing pipelines.
+  <span class="badge">Q&A</span>
+  <time>38:45</time>
+  <h3>The hardest question</h3>
+  <p>Best question from the floor: "How do you get teams to actually change their habits?" Chen's answer: you don't. You change the tool. If the output of your AI writing workflow is structurally required to be scannable — if the template enforces navigation, section headings, and progressive disclosure — teams produce better docs without changing their behavior.</p>
+  <p class="principle">
+    <strong>Change the tool, not the habit.</strong> Structure the output to require good behavior.
   </p>
 </section>
 
-<p class="note">
-  This page is intentionally standalone. It can be opened directly in a browser
-  and uses only <code>readworthy.css</code>.
-</p>
+<h2 id="key-ideas">Key Ideas</h2>
+
+<section class="card-grid">
+  <section class="spec-card">
+    <span class="badge">Pattern</span>
+    <h3>The spec-as-contract trap</h3>
+    <p>When teams stop re-reading a spec and start citing it as authoritative, it becomes a liability. The document no longer describes the system — it describes what people agreed to at one point in time.</p>
+  </section>
+
+  <section class="spec-card">
+    <span class="badge">Principle</span>
+    <h3>Progressive disclosure as a writing principle</h3>
+    <p>Structure documents so a reader can stop at the right depth. The person who needs the decision can stop at the summary. The person implementing can drill into the detail. Navigation is a feature, not decoration.</p>
+  </section>
+
+  <section class="spec-card">
+    <span class="badge">Framework</span>
+    <h3>Generate, Distill, Operate</h3>
+    <p>Separate the three phases. AI is strongest at Generate. The gap is at Distill — AI reorganization for read-optimization. Operate requires structure the first two phases rarely produce.</p>
+  </section>
+</section>
+
+<h2 id="takeaways">Takeaways</h2>
+
+<ul class="checklist">
+  <li>Run a "last read vs. last written" audit on your five most critical docs.</li>
+  <li>Separate Generate, Distill, and Operate phases in your AI writing workflow.</li>
+  <li>Add navigation and structure before sharing any doc over 20 lines.</li>
+  <li>Replace single-source specs with linked artifact graphs where compliance allows.</li>
+  <li>Change the tool, not the habit — structure the output to require good behavior.</li>
+</ul>
 
 </main>
 
 <footer style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--rw-border); max-width: var(--rw-measure); margin-inline: auto;">
   <p style="font-family: var(--rw-mono); font-size: 0.8rem; color: var(--rw-muted);">
-    <strong>Learn:</strong> <a href="../guide.html">Guide</a> · <a href="../examples/video-summary.html">Example</a> ·
-    <strong>Understand:</strong> <a href="../research/html-first-agent-docs.html">Why HTML</a> · <a href="../research/readworthy-naming-brief.html">Naming</a> · <a href="thariq-html-thread-summary.html">Industry Signal</a> · <a href="../research/comp-analysis-research.html">Competitive Analysis</a> · <a href="../caniuse-html-agent-docs.html">Compatibility</a> ·
-    <strong>Reference:</strong> <a href="cli-architecture.html">CLI</a> ·
+    <strong>Learn:</strong> <a href="../guide.html">Guide</a> · <a href="video-summary.html">Example</a> ·
+    <strong>Understand:</strong> <a href="../research/html-first-agent-docs.html">Why HTML</a> · <a href="../research/readworthy-naming-brief.html">Naming</a> · <a href="thread-archive.html">Industry Signal</a> · <a href="research-brief.html">Research</a> · <a href="../caniuse-html-agent-docs.html">Compatibility</a> ·
+    <strong>Planned:</strong> <a href="architecture-spec.html">CLI Spec</a> ·
     <a href="../research/sitemap.html">Site Map</a>
   </p>
-  <p style="font-family: var(--rw-mono); font-size: 0.75rem; color: var(--rw-muted);">A <a href="https://sprintz.co">Sprintz</a> project.</p>
+  <p style="font-family: var(--rw-mono); font-size: 0.75rem; color: var(--rw-muted);">A <a href="https://sprintz.agency">Sprintz</a> project.</p>
 </footer>
 
 </body>

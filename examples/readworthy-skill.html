@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Readworthy Skill</title>
+  <link rel="stylesheet" href="../readworthy.css" />
+</head>
+<body class="doc">
+
+<nav class="toc site-nav" aria-label="Site navigation" style="margin-bottom: 0;">
+  <a href="../index.html">← Readworthy</a>
+  <a href="../guide.html">Guide</a>
+  <a href="../examples/" aria-current="page">Examples</a>
+  <a href="../caniuse-html-agent-docs.html">Compatibility</a>
+  <a href="https://github.com/RL22/readworthy">GitHub</a>
+</nav>
+
+<header class="doc-hero">
+  <p class="eyebrow">Agent Reference</p>
+  <h1>Readworthy Skill</h1>
+  <p class="lede">
+    Two lines to your <code>AGENTS.md</code> and one URL. Any agent that reads
+    this page knows exactly when and how to produce Readworthy output.
+  </p>
+</header>
+
+<nav class="toc" aria-label="Table of contents">
+  <a href="../index.html">← Home</a>
+  <a href="#install">Install</a>
+  <a href="#structure">Output Structure</a>
+  <a href="#components">Components</a>
+  <a href="#tokens">Design Tokens</a>
+  <a href="#when">When to Apply</a>
+  <a href="#roadmap">Roadmap</a>
+</nav>
+
+<main class="prose">
+
+<!-- ─── INSTALL ──────────────────────────────────────────────────────────── -->
+
+<h2 id="install">Install</h2>
+
+<p>
+  Add this block to your project's <code>AGENTS.md</code>, <code>CLAUDE.md</code>,
+  or equivalent agent configuration file. The agent loads this page on demand
+  when it needs to produce structured output.
+</p>
+
+<section class="example">
+  <p class="eyebrow" style="margin-bottom: 0.5rem;">AGENTS.md — add this block</p>
+  <pre><code>## Output format
+
+When generating specs, summaries, research briefs, architecture references,
+agent instructions, workflow guides, or any structured document longer than
+~20 lines that will be shared with a team or read repeatedly:
+
+Produce semantic HTML using Readworthy instead of Markdown.
+Full reference: https://rl22.github.io/readworthy/examples/readworthy-skill.html</code></pre>
+</section>
+
+<aside class="note">
+  <p>
+    Works with any agent that reads a project config file — Claude Code
+    (<code>CLAUDE.md</code>), Codex (<code>AGENTS.md</code>), Cursor, Windsurf,
+    or any custom setup. The agent follows the URL when it needs the full
+    component vocabulary.
+  </p>
+</aside>
+
+<h3>First run — ask about design</h3>
+
+<section class="agent-instruction">
+Before generating output for the first time, ask the user one question:
+"Do you have a DESIGN.md I can apply, or should I use Readworthy's default styles?"
+
+If DESIGN.md exists: map its color, typography, and radius tokens to the
+--rw-* CSS variables in the Design Tokens section below. Add a &lt;style&gt;
+override block in &lt;head&gt; immediately after the stylesheet link.
+
+If no DESIGN.md: add one link tag and proceed.
+&lt;link rel="stylesheet" href="readworthy.css"&gt;
+</section>
+
+<section class="warning">
+  <h3>Do not load readworthy.css as agent context</h3>
+  <p>
+    The stylesheet is a render artifact. Agents gain no reasoning benefit from
+    it and burn significant context tokens. Link it in HTML output only —
+    never paste it into a prompt or agent config file.
+  </p>
+</section>
+
+<!-- ─── OUTPUT STRUCTURE ─────────────────────────────────────────────────── -->
+
+<h2 id="structure">Output Structure</h2>
+
+<p>
+  Every Readworthy document uses this shell. Do not omit
+  <code>body.doc</code>, <code>header.doc-hero</code>, or <code>main.prose</code>.
+</p>
+
+<section class="example">
+  <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;title&gt;[Document Title]&lt;/title&gt;
+  &lt;link rel="stylesheet" href="readworthy.css" /&gt;
+&lt;/head&gt;
+&lt;body class="doc"&gt;
+
+&lt;header class="doc-hero"&gt;
+  &lt;p class="eyebrow"&gt;[Document type — Spec · Summary · Brief · Reference]&lt;/p&gt;
+  &lt;h1&gt;[Title]&lt;/h1&gt;
+  &lt;p class="lede"&gt;[One sentence: what this is and who it's for]&lt;/p&gt;
+&lt;/header&gt;
+
+&lt;nav class="toc" aria-label="Table of contents"&gt;
+  &lt;a href="#section-id"&gt;Section Name&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;main class="prose"&gt;
+
+  &lt;!-- Content sections --&gt;
+
+&lt;/main&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</section>
+
+<h3>With DESIGN.md — token override</h3>
+
+<p>
+  Add a <code>&lt;style&gt;</code> block immediately after the stylesheet link.
+  All components inherit the variables automatically — no other changes needed.
+</p>
+
+<section class="example">
+  <pre><code>&lt;link rel="stylesheet" href="readworthy.css"&gt;
+&lt;style&gt;
+  :root {
+    --rw-bg:      [background from DESIGN.md];
+    --rw-fg:      [foreground text from DESIGN.md];
+    --rw-accent:  [primary accent color from DESIGN.md];
+    --rw-font:    [body font stack from DESIGN.md];
+    --rw-mono:    [monospace font stack from DESIGN.md];
+    --rw-radius:  [border radius from DESIGN.md];
+  }
+&lt;/style&gt;</code></pre>
+</section>
+
+<!-- ─── COMPONENT LIBRARY ─────────────────────────────────────────────────── -->
+
+<h2 id="components">Complete Component Library</h2>
+
+<h3>Page structure</h3>
+<table>
+  <thead><tr><th>Class</th><th>Element</th><th>Use for</th></tr></thead>
+  <tbody>
+    <tr><td><code>body.doc</code></td><td><code>&lt;body&gt;</code></td><td>Document root. Required on every Readworthy page.</td></tr>
+    <tr><td><code>.doc-hero</code></td><td><code>&lt;header&gt;</code></td><td>Page hero. Contains eyebrow, h1, and lede.</td></tr>
+    <tr><td><code>.prose</code></td><td><code>&lt;main&gt;</code></td><td>Content container. Sets width constraint and vertical rhythm.</td></tr>
+    <tr><td><code>.toc</code></td><td><code>&lt;nav&gt;</code></td><td>Horizontal pill row for site nav or in-page anchor links.</td></tr>
+  </tbody>
+</table>
+
+<h3>Typography</h3>
+<table>
+  <thead><tr><th>Class</th><th>Element</th><th>Use for</th></tr></thead>
+  <tbody>
+    <tr><td><code>.eyebrow</code></td><td><code>&lt;p&gt;</code></td><td>Document type label above h1. Mono, accent color, uppercase.</td></tr>
+    <tr><td><code>.lede</code></td><td><code>&lt;p&gt;</code></td><td>Standfirst or subtitle beneath h1. Muted, slightly larger.</td></tr>
+    <tr><td><code>.principle</code></td><td><code>&lt;p&gt;</code></td><td>Key rule or guiding statement. Use <code>&lt;strong&gt;</code> for the label.</td></tr>
+  </tbody>
+</table>
+
+<h3>Callouts</h3>
+<table>
+  <thead><tr><th>Class</th><th>Element</th><th>Use for</th></tr></thead>
+  <tbody>
+    <tr><td><code>.note</code></td><td><code>&lt;aside&gt;</code></td><td>Supplemental context. Muted. Does not interrupt the primary read.</td></tr>
+    <tr><td><code>.callout</code></td><td><code>&lt;section&gt;</code></td><td>Featured statement. Slightly larger. TL;DR or key takeaways.</td></tr>
+    <tr><td><code>.warning</code></td><td><code>&lt;section&gt;</code></td><td>Risk, caveat, or blocker. Warning color. Must not be missed.</td></tr>
+  </tbody>
+</table>
+
+<h3>Content blocks</h3>
+<table>
+  <thead><tr><th>Class</th><th>Element</th><th>Use for</th></tr></thead>
+  <tbody>
+    <tr><td><code>.example</code></td><td><code>&lt;section&gt;</code></td><td>Code or output block with subtle frame. Add eyebrow to label it.</td></tr>
+    <tr><td><code>.spec-card</code></td><td><code>&lt;section&gt;</code></td><td>Structured unit with surface background. Badge + heading + body.</td></tr>
+    <tr><td><code>.validation-rule</code></td><td><code>&lt;section&gt;</code></td><td>Constraint or validation block. Same surface as spec-card.</td></tr>
+    <tr><td><code>.prompt-block</code></td><td><code>&lt;section&gt;</code></td><td>Prompt display. Contains an h3 label and a pre block.</td></tr>
+    <tr><td><code>.agent-instruction</code></td><td><code>&lt;section&gt;</code></td><td>Agent-facing instruction. Renders in monospace. Write in second person.</td></tr>
+    <tr><td><code>.timestamp</code></td><td><code>&lt;section&gt;</code></td><td>Timestamped entry. Contains a <code>&lt;time&gt;</code> and an h3.</td></tr>
+    <tr><td><code>.file-tree</code></td><td><code>&lt;pre&gt;</code></td><td>Directory or file tree. Dark background, mono, preserves whitespace.</td></tr>
+  </tbody>
+</table>
+
+<h3>Lists and labels</h3>
+<table>
+  <thead><tr><th>Class</th><th>Element</th><th>Use for</th></tr></thead>
+  <tbody>
+    <tr><td><code>.checklist</code></td><td><code>&lt;ul&gt;</code></td><td>Task or decision list. Items render with accent-colored checkmarks.</td></tr>
+    <tr><td><code>.compact-list</code></td><td><code>&lt;ul&gt;</code></td><td>Standard list with reduced padding. Pair with .checklist as needed.</td></tr>
+    <tr><td><code>.badge</code></td><td><code>&lt;span&gt;</code></td><td>Tag or label pill. Same style as .toc links. Place above card headings.</td></tr>
+  </tbody>
+</table>
+
+<h3>Layout and status</h3>
+<table>
+  <thead><tr><th>Class</th><th>Element</th><th>Use for</th></tr></thead>
+  <tbody>
+    <tr><td><code>.card-grid</code></td><td><code>&lt;section&gt;</code></td><td>Responsive auto-fit grid. Wraps spec-cards. Minimum 14rem per card.</td></tr>
+    <tr><td><code>.status-grid</code></td><td><code>&lt;section&gt;</code></td><td>Semantic alias for card-grid. Use for compatibility matrix layouts.</td></tr>
+    <tr><td><code>.status.supported</code></td><td><code>&lt;span&gt;</code></td><td>Passing, complete, supported. Accent-tinted background.</td></tr>
+    <tr><td><code>.status.partial</code></td><td><code>&lt;span&gt;</code></td><td>In progress, partial support. Muted background.</td></tr>
+    <tr><td><code>.status.neutral</code></td><td><code>&lt;span&gt;</code></td><td>Not applicable, not recommended. Muted background.</td></tr>
+    <tr><td><code>.status.required</code></td><td><code>&lt;span&gt;</code></td><td>Required, blocked, failing. Warning-tinted background.</td></tr>
+  </tbody>
+</table>
+
+<!-- ─── DESIGN TOKENS ─────────────────────────────────────────────────────── -->
+
+<h2 id="tokens">Design Tokens</h2>
+
+<p>All components inherit from these CSS variables. Override any of them in a <code>:root</code> block after the stylesheet link.</p>
+
+<table>
+  <thead><tr><th>Variable</th><th>Default</th><th>Controls</th></tr></thead>
+  <tbody>
+    <tr><td><code>--rw-bg</code></td><td><code>oklch(0.985 0.004 255)</code></td><td>Page background</td></tr>
+    <tr><td><code>--rw-fg</code></td><td><code>oklch(0.19 0.012 255)</code></td><td>Body text</td></tr>
+    <tr><td><code>--rw-muted</code></td><td><code>oklch(0.47 0.018 255)</code></td><td>Secondary text, lede, note, principle</td></tr>
+    <tr><td><code>--rw-border</code></td><td><code>oklch(0.86 0.012 255)</code></td><td>Section dividers, card borders</td></tr>
+    <tr><td><code>--rw-surface</code></td><td><code>oklch(0.955 0.008 255)</code></td><td>Card and block backgrounds</td></tr>
+    <tr><td><code>--rw-code-bg</code></td><td><code>oklch(0.21 0.018 255)</code></td><td>Dark code block background</td></tr>
+    <tr><td><code>--rw-code-fg</code></td><td><code>oklch(0.94 0.008 255)</code></td><td>Code block text</td></tr>
+    <tr><td><code>--rw-accent</code></td><td><code>oklch(0.52 0.14 255)</code></td><td>Links, eyebrow, checkmarks, badges</td></tr>
+    <tr><td><code>--rw-warn</code></td><td><code>oklch(0.58 0.16 62)</code></td><td>Warning text and .required status</td></tr>
+    <tr><td><code>--rw-radius</code></td><td><code>12px</code></td><td>Border radius for cards and code blocks</td></tr>
+    <tr><td><code>--rw-measure</code></td><td><code>72ch</code></td><td>Maximum content width (line length)</td></tr>
+    <tr><td><code>--rw-font</code></td><td><code>ui-sans-serif, system-ui, sans-serif</code></td><td>Body font stack</td></tr>
+    <tr><td><code>--rw-mono</code></td><td><code>ui-monospace, monospace</code></td><td>Monospace (code, badges, eyebrow, agent-instruction)</td></tr>
+  </tbody>
+</table>
+
+<!-- ─── WHEN TO APPLY ─────────────────────────────────────────────────────── -->
+
+<h2 id="when">When to Apply</h2>
+
+<p>If more answers are yes than no, produce Readworthy HTML. Otherwise keep Markdown.</p>
+
+<ul class="checklist">
+  <li>Will the document exceed ~20 lines of structured content?</li>
+  <li>Does it contain multiple sections a reader needs to navigate?</li>
+  <li>Will it be shared with a team, stored as a reference, or read more than once?</li>
+  <li>Is it a spec, brief, operational artifact, or decision record?</li>
+  <li>Does the content benefit from cards, callouts, code blocks, or checklists?</li>
+</ul>
+
+<section class="warning">
+  <h3>Keep Markdown for</h3>
+  <p>
+    <code>README.md</code>, <code>AGENTS.md</code>, <code>CLAUDE.md</code>,
+    <code>SKILL.md</code>, <code>CHANGELOG.md</code>, <code>LICENSE</code>,
+    inline code comments, and any file an ecosystem discovers by exact filename.
+    HTML does not satisfy those routing requirements.
+  </p>
+</section>
+
+<p class="principle">
+  <strong>Core model:</strong> Markdown routes. HTML operates. CSS renders.
+</p>
+
+<!-- ─── ROADMAP ───────────────────────────────────────────────────────────── -->
+
+<h2 id="roadmap">Roadmap</h2>
+
+<p>The AGENTS.md pattern above is the current install method. Two additional distribution mechanisms are planned:</p>
+
+<section class="card-grid">
+
+  <section class="spec-card">
+    <span class="badge">Planned</span>
+    <h3>agentskills.io Skill</h3>
+    <p>
+      A proper <code>readworthy/SKILL.md</code> with YAML frontmatter,
+      installable via the <a href="https://agentskills.io">agentskills.io</a>
+      registry. Enables one-command install and automatic activation based on
+      task type — no manual AGENTS.md edits required.
+    </p>
+  </section>
+
+  <section class="spec-card">
+    <span class="badge">Planned</span>
+    <h3>Readworthy CLI</h3>
+    <p>
+      <code>readworthy init</code>, <code>convert</code>, <code>audit</code>,
+      and <code>validate</code> — for auditing Markdown ecosystems, estimating
+      token savings, and converting docs without breaking compatibility.
+      <a href="architecture-spec.html">See the architecture spec →</a>
+    </p>
+  </section>
+
+</section>
+
+</main>
+
+<footer style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--rw-border); max-width: var(--rw-measure); margin-inline: auto;">
+  <p style="font-family: var(--rw-mono); font-size: 0.8rem; color: var(--rw-muted);">
+    <strong>Learn:</strong> <a href="../guide.html">Guide</a> · <a href="video-summary.html">Example</a> ·
+    <strong>Understand:</strong> <a href="../research/html-first-agent-docs.html">Why HTML</a> · <a href="../research/readworthy-naming-brief.html">Naming</a> · <a href="thread-archive.html">Industry Signal</a> · <a href="../research/comp-analysis-research.html">Competitive Analysis</a> · <a href="../caniuse-html-agent-docs.html">Compatibility</a> ·
+    <strong>Planned:</strong> <a href="architecture-spec.html">CLI Spec</a> ·
+    <a href="../research/sitemap.html">Site Map</a>
+  </p>
+  <p style="font-family: var(--rw-mono); font-size: 0.75rem; color: var(--rw-muted);">A <a href="https://sprintz.agency">Sprintz</a> project.</p>
+</footer>
+
+</body>
+</html>

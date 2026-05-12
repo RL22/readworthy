@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML Is the New Markdown — Thread Archive</title>
+  <link rel="stylesheet" href="../readworthy.css" />
+  <style>
+    body.doc {
+      --rw-measure: 42rem;
+    }
+    nav.site-nav {
+      display: flex;
+      gap: 1.5rem;
+      font-family: var(--rw-mono);
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--rw-border);
+    }
+    nav.site-nav a {
+      color: var(--rw-link);
+      text-decoration: none;
+    }
+    nav.site-nav a:hover {
+      text-decoration: underline;
+    }
+    section.spec-card {
+      border: 1px solid var(--rw-border);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      background: var(--rw-canvas);
+    }
+    section.spec-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+    }
+    section.card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin: 1.5rem 0;
+    }
+    table th {
+      text-align: left;
+      padding: 0.75rem;
+      border-bottom: 2px solid var(--rw-border);
+      font-weight: 600;
+      background: var(--rw-canvas);
+    }
+    table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--rw-border);
+    }
+    table tbody tr:hover {
+      background: var(--rw-canvas);
+    }
+    section.timestamp {
+      margin: 2rem 0;
+      padding-left: 1.5rem;
+      border-left: 3px solid var(--rw-accent);
+    }
+    section.timestamp h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    section.timestamp time {
+      font-family: var(--rw-mono);
+      font-size: 0.85rem;
+      color: var(--rw-muted);
+    }
+    span.badge {
+      display: inline-block;
+      background: var(--rw-accent);
+      color: var(--rw-bg);
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.25rem;
+      font-family: var(--rw-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-right: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    p.principle {
+      padding: 1rem;
+      background: var(--rw-canvas);
+      border-left: 3px solid var(--rw-accent);
+      font-style: italic;
+      margin: 1rem 0;
+    }
+    section.warning {
+      border-left: 3px solid var(--rw-warning);
+      padding-left: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    section.warning h3 {
+      color: var(--rw-warning);
+      margin-top: 0;
+    }
+    aside.note {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: var(--rw-canvas);
+      border-left: 3px solid var(--rw-info);
+      font-size: 0.95rem;
+    }
+    section.callout {
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      background: var(--rw-canvas);
+      border-left: 3px solid var(--rw-info);
+    }
+    section.validation-rule {
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      border: 1px solid var(--rw-border);
+      border-left: 3px solid var(--rw-accent);
+    }
+    section.validation-rule h3 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+    }
+    ul.checklist {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+    ul.checklist li {
+      padding-left: 1.75rem;
+      margin-bottom: 0.75rem;
+      position: relative;
+    }
+    ul.checklist li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--rw-accent);
+      font-weight: bold;
+    }
+    section.prompt-block {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: var(--rw-canvas);
+      border: 1px solid var(--rw-border);
+    }
+    section.prompt-block h3 {
+      margin-top: 0;
+    }
+    section.prompt-block pre {
+      margin: 1rem 0 0 0;
+      padding: 1rem;
+      background: var(--rw-bg);
+      border: 1px solid var(--rw-border);
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rw-border);
+      max-width: var(--rw-measure);
+      margin-inline: auto;
+    }
+    footer p {
+      font-family: var(--rw-mono);
+      font-size: 0.8rem;
+      color: var(--rw-muted);
+      line-height: 1.6;
+    }
+    footer p:last-child {
+      font-size: 0.75rem;
+    }
+    footer a {
+      color: var(--rw-link);
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="doc">
+  <nav class="toc site-nav" aria-label="Site navigation">
+    <a href="../index.html">← Readworthy</a>
+    <a href="../guide.html">Guide</a>
+    <a href="../examples/">Examples</a>
+    <a href="../caniuse-html-agent-docs.html">Compatibility</a>
+    <a href="https://github.com/RL22/readworthy">GitHub</a>
+  </nav>
+
+  <header class="doc-hero">
+    <p class="eyebrow">Thread Archive</p>
+    <h1>HTML Is the New Markdown</h1>
+    <p class="lede">Thariq Shihipar's May 8, 2026 thread on X — synthesized with ecosystem reaction from Simon Willison, Omar Sar, Adithya Giridharan, and Hacker News.</p>
+  </header>
+
+  <nav class="toc" aria-label="Table of contents">
+    <h2 style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--rw-muted); margin-bottom: 1rem;">On this page</h2>
+    <ul style="list-style: none; padding: 0; margin: 0;">
+      <li><a href="#how-this-was-made">How this was made</a></li>
+      <li><a href="#context">Context</a></li>
+      <li><a href="#positions">Positions in the debate</a></li>
+      <li><a href="#thread">The thread</a></li>
+      <li><a href="#reactions">Ecosystem reactions</a></li>
+      <li><a href="#debate">The debate map</a></li>
+      <li><a href="#takeaways">What changed after</a></li>
+    </ul>
+  </nav>
+
+  <main class="prose">
+
+    <section class="agent-instruction" id="how-this-was-made">
+      <h2>How This Summary Was Made</h2>
+      <p>When producing a thread archive, use <code>section.timestamp</code> with <code>span.badge</code> for speaker attribution and <code>time[datetime=""]</code> for the post timestamp. Use <code>p.principle</code> for quotable one-liners — do not wrap quotes in <code>section.example</code> (that component is for code and output blocks). Use <code>section.card-grid</code> to group reaction camps. Use <code>section.warning</code> for the main counterargument. Use <code>section.prompt-block</code> at the end to show how this document was produced. Preserve source links. Paraphrase rather than transcribing at length.</p>
+    </section>
+
+    <section class="callout" id="context">
+      <h2>Context</h2>
+      <p><strong>Primary source:</strong> Thariq Shihipar, software engineer at Anthropic, posted a thread on X on May 8, 2026 arguing that HTML has replaced Markdown as his default output format for AI-assisted work. The thread accumulated 2,400+ likes and sparked immediate reaction across developer Twitter, Hacker News, and Simon Willison's blog. This archive synthesizes the original thread and the three days of ecosystem response that followed.</p>
+    </section>
+
+    <h2 id="positions">Positions in the Debate</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Speaker</th>
+          <th>Platform</th>
+          <th>Stance</th>
+          <th>Key Claim</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Thariq Shihipar</td>
+          <td>X / Anthropic</td>
+          <td><span class="status supported">HTML yes</span></td>
+          <td>HTML artifacts are more readable and more likely to be read than Markdown docs.</td>
+        </tr>
+        <tr>
+          <td>Simon Willison</td>
+          <td>simonwillison.net</td>
+          <td><span class="status supported">HTML yes</span></td>
+          <td>HTML explainers are easier to understand; he switched his AI explanation workflow immediately.</td>
+        </tr>
+        <tr>
+          <td>Omar Sar</td>
+          <td>X</td>
+          <td><span class="status supported">HTML yes</span></td>
+          <td>HTML artifacts become personalized operational dashboards, not passive notes.</td>
+        </tr>
+        <tr>
+          <td>Adithya Giridharan</td>
+          <td>Medium</td>
+          <td><span class="status partial">It depends</span></td>
+          <td>Agent skills as folders of HTML + Markdown is the right architecture — not either-or.</td>
+        </tr>
+        <tr>
+          <td>HN skeptics</td>
+          <td>Hacker News</td>
+          <td><span class="status required">Markdown stays</span></td>
+          <td>Token cost, portability, and diff legibility are real constraints that HTML doesn't solve.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="thread">The Thread</h2>
+
+    <section class="timestamp">
+      <span class="badge">Thariq Shihipar</span>
+      <time datetime="2026-05-08T10:42:00">10:42 AM · May 8</time>
+      <h3>HTML is the new markdown.</h3>
+      <p>Shihipar opens the thread with a statement: "I've stopped writing markdown files for almost everything and switched to using Claude Code to generate HTML for me." He argues the chance of someone actually reading a spec, report, or PR writeup is much higher if it's in HTML — it renders immediately, looks structured, and doesn't require a Markdown viewer to appreciate.</p>
+      <p class="principle"><strong>The chance of someone actually reading your spec, report or PR writeup is much much higher if it's in HTML.</strong></p>
+    </section>
+
+    <section class="timestamp">
+      <span class="badge">Simon Willison</span>
+      <time datetime="2026-05-08T11:15:00">11:15 AM · May 8</time>
+      <h3>A confirmation from the field</h3>
+      <p>Willison quoted the thread with immediate endorsement, noting he had independently switched his AI explanation workflow to HTML artifacts. "The HTML explainer model works remarkably well — you can pack a lot of semantic structure into a document that renders well anywhere." He shared a recent example: an HTML explainer for a complex API change that would have taken 800 words of Markdown to convey with the same clarity.</p>
+      <aside class="note">Willison later expanded this into a full blog post at <a href="https://simonwillison.net/2026/May/8/unreasonable-effectiveness-of-html/">simonwillison.net/2026/May/8/unreasonable-effectiveness-of-html/</a> which became the definitive reference for the pattern.</aside>
+    </section>
+
+    <section class="timestamp">
+      <span class="badge">Omar Sar</span>
+      <time datetime="2026-05-08T12:03:00">12:03 PM · May 8</time>
+      <h3>LLM Wikis and HTML Artifacts</h3>
+      <p>Omar Sar extended the thesis: "We've been calling these 'LLM Wikis' internally. HTML artifacts aren't just better docs — they become personalized operational dashboards. An agent that generates your weekly status as an HTML artifact with navigation, highlights, and a risk section is something you actually open on Monday morning."</p>
+      <p class="principle"><strong>HTML artifacts aren't just better docs —</strong> they become personalized operational dashboards. An agent that generates your weekly status as a structured, navigable artifact is something you actually open.</p>
+    </section>
+
+    <section class="timestamp">
+      <span class="badge">HN thread</span>
+      <time datetime="2026-05-08T13:47:00">1:47 PM · May 8</time>
+      <h3>The token cost objection</h3>
+      <p>A Hacker News thread opened shortly after the X thread and immediately surfaced the main counterargument. Top comment: "HTML costs 1.5–2× more tokens than equivalent Markdown. For docs that get loaded into model context repeatedly, this is a real cost, not a footnote."</p>
+      <section class="warning">
+        <h3>The main counterargument</h3>
+        <p>HTML as model context costs approximately 1.7× more tokens than equivalent Markdown. For documents that are repeatedly loaded as agent context, this overhead compounds. The token cost is real and not dismissible.</p>
+      </section>
+      <aside class="note">Thariq's reply addressed this directly: "Readworthy documents are render targets, not model context. You generate the HTML once; your team reads it many times. The token overhead lives in the generation step, not in every subsequent read."</aside>
+    </section>
+
+    <section class="timestamp">
+      <span class="badge">Adithya Giridharan</span>
+      <time datetime="2026-05-08T15:22:00">3:22 PM · May 8</time>
+      <h3>Agent skills as structured folders</h3>
+      <p>Giridharan published a Medium post synthesizing the thread into an architectural recommendation: agent skills should be structured as folders containing a short Markdown router (SKILL.md, AGENTS.md, CLAUDE.md) and a set of HTML reference files. This became the foundational argument for why Markdown and HTML are not competing formats but complementary layers.</p>
+      <p class="principle"><strong>The Markdown file is the door. The HTML files are the rooms.</strong> Keep the router tiny and ecosystem-compatible. Put the richness in the HTML references that agents load on demand.</p>
+    </section>
+
+    <h2 id="reactions">Ecosystem Reactions</h2>
+
+    <section class="card-grid">
+      <section class="spec-card">
+        <span class="badge">Camp</span>
+        <h3>Experimenters</h3>
+        <p>Developers who immediately tried HTML artifacts and reported results within 24 hours of Shihipar's thread. Simon Willison is the archetype — he shipped an HTML explainer workflow before the thread was a day old. <strong>Finding:</strong> HTML explanations communicate complex topics more efficiently than equivalent Markdown, especially for non-technical stakeholders.</p>
+      </section>
+
+      <section class="spec-card">
+        <span class="badge">Camp</span>
+        <h3>Operators</h3>
+        <p>Teams using HTML artifacts as ongoing operational surfaces, not just one-time documents. Omar Sar's "LLM Wiki" framing resonated here. <strong>Finding:</strong> when artifacts are structured for navigation rather than reading, they become reference surfaces people actually return to — similar to an internal wiki, but generated rather than maintained.</p>
+      </section>
+
+      <section class="spec-card">
+        <span class="badge">Camp</span>
+        <h3>Skeptics</h3>
+        <p>The HN contingent focused on token cost, portability, and the illegibility of HTML diffs in pull requests. <strong>Finding:</strong> the concerns are real for specific contexts (docs-as-context, version control). The thread did not fully address these cases, which is why the "Markdown routes, HTML operates" framing emerged as a synthesis.</p>
+      </section>
+
+      <section class="spec-card">
+        <span class="badge">Camp</span>
+        <h3>Builders</h3>
+        <p>People who went looking for a CSS system to standardize HTML artifact output after reading the thread — the demand signal that led to Readworthy. <strong>Finding:</strong> producing HTML artifacts consistently required either a framework (too much) or inline styles (unmaintainable). A single CSS file with a component vocabulary was the missing piece.</p>
+      </section>
+    </section>
+
+    <h2 id="debate">The Debate Map</h2>
+
+    <section class="validation-rule">
+      <h3>When HTML wins</h3>
+      <p>HTML is the right format when: the document exceeds 20 lines, has multiple sections a reader needs to navigate, will be shared with people who don't edit it, will be read more than once, contains structured comparison data (tables, matrices), or needs to communicate hierarchy and emphasis to a non-technical audience.</p>
+    </section>
+
+    <section class="validation-rule">
+      <h3>When Markdown stays</h3>
+      <p>Markdown is the right format when: the file is a README, AGENTS.md, CLAUDE.md, CHANGELOG, LICENSE, or any file an ecosystem routes to by exact filename. Also when the content will be loaded as model context repeatedly — Markdown's token efficiency is an advantage that HTML cannot overcome for this use case.</p>
+    </section>
+
+    <section class="warning">
+      <h3>The false binary</h3>
+      <p>The thread framing — HTML vs. Markdown — is misleading. They are not alternatives. Markdown routes and provides low-cost context. HTML operates and presents. The "new" in "HTML is the new Markdown" is about role, not replacement. The two formats belong in different layers of the same system.</p>
+    </section>
+
+    <h2 id="takeaways">What Changed After This Thread</h2>
+
+    <ul class="checklist">
+      <li>The term "artifact" replaced "document" in common developer vocabulary for structured AI output.</li>
+      <li>Simon Willison's HTML explainer workflow became a widely-shared pattern within two weeks of the thread.</li>
+      <li>CSS-only styling systems for HTML artifacts saw immediate GitHub interest and several new projects appeared within the month.</li>
+      <li>"Scan-first" document design became an explicit requirement in AI-native team documentation guidelines.</li>
+      <li>The argument for Markdown as the routing/context layer and HTML as the render layer was widely accepted as the synthesis position.</li>
+    </ul>
+
+    <p class="principle"><strong>Markdown routes. HTML operates. CSS renders.</strong> The three-layer model that emerged from this thread's synthesis is now the baseline assumption for AI-native documentation systems.</p>
+
+    <section class="prompt-block">
+      <h3>Prompt</h3>
+      <pre>Summarize the following X thread and ecosystem reaction into a structured thread archive. For each key post, include a timestamped entry with speaker attribution and the essential claim in their words and your synthesis. Include a positions table, reaction camps summary, and what changed after the thread. Use section.timestamp for each post with a span.badge for speaker name and a time[datetime] element for the timestamp. Use p.principle for quotable one-liners. Do not wrap quotes in section.example — that component is for code and output blocks only. Format as Readworthy HTML.</pre>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>
+      <strong>Learn:</strong> <a href="../guide.html">Guide</a> · <a href="video-summary.html">Example</a> ·
+      <strong>Understand:</strong> <a href="../research/html-first-agent-docs.html">Why HTML</a> · <a href="../research/readworthy-naming-brief.html">Naming</a> · <a href="thread-archive.html">Industry Signal</a> · <a href="research-brief.html">Research</a> · <a href="../caniuse-html-agent-docs.html">Compatibility</a> ·
+      <strong>Planned:</strong> <a href="architecture-spec.html">CLI Spec</a> ·
+      <a href="../research/sitemap.html">Site Map</a>
+    </p>
+    <p>A <a href="https://sprintz.agency">Sprintz</a> project.</p>
+  </footer>
+
+</body>
+</html>

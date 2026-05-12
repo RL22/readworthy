@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Readworthy CLI Architecture</title>
+  <link rel="stylesheet" href="../readworthy.css" />
+</head>
+<body class="doc">
+  <nav class="toc site-nav" aria-label="Site navigation" style="margin-bottom: 0;">
+    <a href="../index.html">← Readworthy</a>
+    <a href="../guide.html">Guide</a>
+    <a href="../examples/">Examples</a>
+    <a href="../caniuse-html-agent-docs.html">Compatibility</a>
+    <a href="https://github.com/RL22/readworthy">GitHub</a>
+  </nav>
+
+  <header class="doc-hero">
+    <p class="eyebrow">Architecture Spec</p>
+    <h1>Readworthy CLI</h1>
+    <p class="lede">A two-phase CLI for auditing Markdown documentation ecosystems, estimating token savings, and converting selected docs to semantic HTML without breaking compatibility. Planned feature.</p>
+  </header>
+
+  <nav class="toc">
+    <a href="#status">Status</a>
+    <a href="#decision">Design Decision</a>
+    <a href="#why-cli">Why CLI-first</a>
+    <a href="#commands">Commands</a>
+    <a href="#workflow">Two-Phase Workflow</a>
+    <a href="#data-shapes">Data Shapes</a>
+    <a href="#validation">Validation Rules</a>
+    <a href="#compatibility">Compatibility</a>
+    <a href="#errors">Error Handling</a>
+    <a href="#agent-usage">Agent Usage</a>
+    <a href="#principles">Design Principles</a>
+  </nav>
+
+  <main class="prose">
+    <section class="warning" id="status">
+      <h3>Planned feature</h3>
+      <p>The Readworthy CLI does not exist yet. This document is an architecture specification — and an example of what a technical spec looks like rendered with Readworthy. <a href="readworthy-skill.html#roadmap">See the roadmap →</a></p>
+    </section>
+
+    <section class="callout" id="decision">
+      <p><strong>Design decision:</strong> Readworthy should be CLI-first with an optional agent skill layer. The CLI performs deterministic repo analysis, token auditing, validation, and conversion. The agent skill orchestrates the CLI conversationally — it does not contain transformation logic.</p>
+    </section>
+
+    <h2 id="why-cli">Why CLI-first</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Need</th>
+          <th>Best fit</th>
+          <th>Reason</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Repo scanning</td>
+          <td>CLI</td>
+          <td>Requires filesystem access, deterministic paths, and repeatable output across runs.</td>
+        </tr>
+        <tr>
+          <td>Token estimates</td>
+          <td>CLI</td>
+          <td>Requires consistent file-size and tokenizer heuristics that should not vary by model or session.</td>
+        </tr>
+        <tr>
+          <td>Markdown-to-HTML conversion</td>
+          <td>CLI</td>
+          <td>Transformations must be reproducible, testable, and reversible without model involvement.</td>
+        </tr>
+        <tr>
+          <td>Migration reasoning</td>
+          <td>Agent skill</td>
+          <td>Useful for explaining tradeoffs, answering questions, and generating user-facing recommendations.</td>
+        </tr>
+        <tr>
+          <td>Orchestration and approval flow</td>
+          <td>Agent skill</td>
+          <td>Natural language workflow — ask, review, approve, execute — is the agent's native mode.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="principle"><strong>The CLI is the engine. The skill is the interface.</strong> Transformation logic lives in the binary. The agent invokes the binary, interprets the output, and handles the human conversation.</p>
+
+    <h2 id="commands">Commands</h2>
+
+    <section class="card-grid">
+      <section class="spec-card">
+        <span class="badge">Read-only</span>
+        <h3>readworthy init</h3>
+        <p>Audits the repository, identifies Markdown spec files, estimates context cost, classifies compatibility, and outputs a proposed migration plan to .readworthy/plan.json. Does not modify any files. Run this first.</p>
+      </section>
+
+      <section class="spec-card">
+        <span class="badge">Writes files</span>
+        <h3>readworthy convert</h3>
+        <p>Executes the approved plan. Creates HTML files, optionally converts Markdown loaders, backs up originals to .readworthy/backups/, validates output, and reports actual token savings.</p>
+      </section>
+
+      <section class="spec-card">
+        <span class="badge">Read-only</span>
+        <h3>readworthy audit</h3>
+        <p>Recalculates token and context estimates after changes. Use after editing generated HTML to verify the estimate is still accurate and the CSS is correctly excluded from the count.</p>
+      </section>
+
+      <section class="spec-card">
+        <span class="badge">Read-only</span>
+        <h3>readworthy validate</h3>
+        <p>Validates generated HTML files for structural correctness: one h1 per file, no duplicate IDs, no inline styles, readworthy.css linked as a render layer, CSS excluded from agent-context estimate.</p>
+      </section>
+    </section>
+
+    <h2 id="workflow">Two-Phase Workflow</h2>
+
+    <section class="spec-card">
+      <span class="badge">Phase 1 — Read-only</span>
+      <h3>readworthy init</h3>
+      <p>The first run is a learn/prime step. It audits the repository, identifies Markdown spec files, estimates context cost, classifies compatibility, and outputs a proposed migration plan. It should not modify files.</p>
+      <pre><code>$ readworthy init
+
+Repository Analysis Complete
+
+Detected Specs:
+──────────────────────────
+README.md        Markdown Required      Repository discovery
+AGENTS.md        Markdown Required      Agent routing
+design.md        HTML Candidate         Visual system + tokens
+product.md       HTML Candidate         Product requirements
+validation.md    Strong HTML Candidate  Structured QA rules
+CHANGELOG.md     Keep Markdown          Version history
+
+Token Audit:
+──────────────────────────
+Current Markdown Specs:        ~8,420 estimated tokens
+Projected Hybrid Architecture: ~5,180 estimated tokens
+Projected Reduction:           ~3,240 tokens / 38.4%
+
+Compatibility Risks:
+──────────────────────────
+⚠ README.md — keep Markdown for GitHub/package ecosystem discovery
+⚠ AGENTS.md — keep Markdown for Codex-style routing
+⚠ SKILL.md — keep Markdown when used by Agent Skills hosts
+⚠ readworthy.css — exclude from all agent-context token estimates
+
+Recommended Command:
+readworthy convert --plan .readworthy/plan.json</code></pre>
+      <aside class="note">Plan is written to .readworthy/plan.json. Review this file before running convert — it lists every file operation and can be edited to exclude specific files.</aside>
+    </section>
+
+    <section class="spec-card">
+      <span class="badge">Phase 2 — Writes files</span>
+      <h3>readworthy convert</h3>
+      <p>The conversion step writes selected HTML files, optionally creates lightweight Markdown loaders, backs up originals, validates output, and reports actual savings.</p>
+      <pre><code>$ readworthy convert --plan .readworthy/plan.json
+
+Conversion Complete
+
+Created:
+──────────────────────────
+docs/design.html           14.2 KB   ~3,050 estimated tokens
+docs/product.html           9.8 KB   ~2,120 estimated tokens
+docs/validation.html        6.1 KB   ~1,260 estimated tokens
+
+Modified:
+──────────────────────────
+design.md      → lightweight loader (original backed up)
+product.md     → lightweight loader (original backed up)
+validation.md  → lightweight loader (original backed up)
+
+Preserved:
+──────────────────────────
+README.md
+AGENTS.md
+CHANGELOG.md
+LICENSE
+
+Actual Savings:
+──────────────────────────
+Previous default agent load:   ~8,420 tokens
+New default agent load:        ~1,070 tokens
+On-demand HTML references:     ~6,430 tokens
+Default context reduction:     ~7,350 tokens / 87.3%
+
+Validation:
+──────────────────────────
+✅ Required Markdown files preserved
+✅ HTML files contain one h1 each
+✅ No duplicate IDs found
+✅ No inline styles detected
+✅ readworthy.css linked as render layer
+✅ CSS excluded from agent-context estimate</code></pre>
+    </section>
+
+    <h2 id="data-shapes">Data Shapes</h2>
+
+    <h3>plan.json</h3>
+    <section class="example">
+      <pre><code>{
+  "version": "1",
+  "created": "2026-05-12T14:30:00Z",
+  "repository": "./",
+  "files": [
+    {
+      "path": "design.md",
+      "classification": "html-candidate",
+      "compatibilityRisk": "low",
+      "estimatedTokens": 1840,
+      "recommendation": "convert",
+      "targetPath": "docs/design.html"
+    },
+    {
+      "path": "README.md",
+      "classification": "markdown-required",
+      "compatibilityRisk": "high",
+      "estimatedTokens": 620,
+      "recommendation": "preserve"
+    }
+  ],
+  "summary": {
+    "currentTokens": 8420,
+    "projectedTokens": 5180,
+    "reduction": 3240,
+    "reductionPercent": 38.4
+  }
+}</code></pre>
+    </section>
+
+    <h3>.readworthy/ directory structure</h3>
+    <pre class="file-tree">.readworthy/
+├── plan.json          ← generated by init, consumed by convert
+├── audit-report.json  ← generated by audit
+├── backups/
+│   ├── design.md.bak
+│   ├── product.md.bak
+│   └── validation.md.bak
+└── logs/
+    └── convert-2026-05-12.log</pre>
+
+    <h2 id="validation">Validation Rules</h2>
+
+    <section class="validation-rule">
+      <h3>Spec detection by name and classification</h3>
+      <p>Recognize common Markdown spec names and classify them by compatibility requirement. Classification should be based on ecosystem role, not filename alone — a file named design.html.md should still be classified by its content type.</p>
+      <pre><code>README.md, AGENTS.md, SKILL.md, install.md, design.md, brand.md, product.md, validation.md, components.md, prompts.md, workflows.md, architecture.md, CHANGELOG.md, CONTRIBUTING.md, LICENSE</code></pre>
+    </section>
+
+    <section class="validation-rule">
+      <h3>Token estimates must be labeled</h3>
+      <p>Every token count in CLI output must be labeled with ~ or the word "estimated" unless a real tokenizer was used. Do not present heuristic guesses as facts. When a tokenizer is available, label output as "exact."</p>
+    </section>
+
+    <section class="validation-rule">
+      <h3>CSS must not appear in agent-context estimates</h3>
+      <p>When calculating token projections, exclude readworthy.css from the count in all scenarios. It is a render layer, not a context file. Including it inflates the "current load" estimate and misrepresents the actual agent context.</p>
+    </section>
+
+    <section class="validation-rule">
+      <h3>Loader files must not reference CSS</h3>
+      <p>A generated .md loader file that references an HTML artifact must not include or imply that the agent should load readworthy.css. The CSS link belongs only in the HTML output file itself.</p>
+    </section>
+
+    <section class="validation-rule">
+      <h3>HTML output must have exactly one h1</h3>
+      <p>Validate that each generated HTML file has precisely one h1 element. Multiple h1s indicate a structural generation error. Zero h1s indicate a missing document title.</p>
+    </section>
+
+    <section class="validation-rule">
+      <h3>No duplicate element IDs</h3>
+      <p>Run an ID uniqueness check on each generated HTML file. Duplicate IDs break anchor navigation and violate the HTML spec. This is a validation failure, not a warning.</p>
+    </section>
+
+    <section class="validation-rule">
+      <h3>No inline styles in generated HTML</h3>
+      <p>Generated HTML must not contain style="" attributes. All visual decisions belong in the readworthy.css token system or in a :root override block. Inline styles are a signal that the generation prompt was not following the Readworthy output spec.</p>
+    </section>
+
+    <section class="validation-rule">
+      <h3>readworthy.css linked, not inlined</h3>
+      <p>The stylesheet must appear as a link tag in the document head, not as a style block with the full stylesheet content. Inlining the CSS defeats the purpose of a shared render layer and inflates file size.</p>
+    </section>
+
+    <h2 id="compatibility">Compatibility</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Environment</th>
+          <th>Support</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Node 18 LTS</td>
+          <td><span class="status supported">supported</span></td>
+        </tr>
+        <tr>
+          <td>Node 20 LTS</td>
+          <td><span class="status supported">supported</span></td>
+        </tr>
+        <tr>
+          <td>Node 22</td>
+          <td><span class="status supported">supported</span></td>
+        </tr>
+        <tr>
+          <td>Node 16</td>
+          <td><span class="status partial">partial</span> — no built-in fetch; tokenizer API unavailable</td>
+        </tr>
+        <tr>
+          <td>macOS / Linux</td>
+          <td><span class="status supported">supported</span></td>
+        </tr>
+        <tr>
+          <td>Windows (PowerShell)</td>
+          <td><span class="status partial">partial</span></td>
+        </tr>
+        <tr>
+          <td>GitHub Actions</td>
+          <td><span class="status supported">supported</span></td>
+        </tr>
+        <tr>
+          <td>Docker</td>
+          <td><span class="status supported">supported</span></td>
+        </tr>
+        <tr>
+          <td>Claude Code (via Bash tool)</td>
+          <td><span class="status supported">supported</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <aside class="note">Token estimation uses the Tiktoken library when available (Node 20+). On Node 16 or when Tiktoken is unavailable, the CLI falls back to a characters-divided-by-4 heuristic and labels all estimates with ~.</aside>
+
+    <h2 id="errors">Error Handling</h2>
+
+    <section class="warning">
+      <h3>Unrecoverable errors exit non-zero</h3>
+      <p>If the CLI encounters a file it cannot parse, a plan.json that references a file that no longer exists, or a backup directory that already contains a conflicting .bak file, it exits with a non-zero status code and does not proceed. Partial conversion is not attempted — review and fix the error, then re-run.</p>
+    </section>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Exit code</th>
+          <th>Condition</th>
+          <th>Recovery</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0</td>
+          <td>Success</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Plan file not found or malformed</td>
+          <td>Run readworthy init to regenerate plan.json</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Target file conflict — HTML already exists at conversion target</td>
+          <td>Delete the existing file or update the plan target path</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Backup conflict — .bak file already exists in backups/</td>
+          <td>Review the existing backup, move or delete it, then retry</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Validation failure after conversion</td>
+          <td>Review the failure report, fix the HTML, run readworthy validate</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>CSS inlining detected in generated output</td>
+          <td>Regenerate the affected file with the correct output prompt</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="agent-usage">Agent Usage</h2>
+
+    <section class="agent-instruction">
+      <p>When the user asks you to analyze or convert their documentation, run readworthy init first. Read the output carefully. Present the Planned Operations list to the user before proceeding — do not run readworthy convert without explicit user approval. If the user approves, run: readworthy convert --plan .readworthy/plan.json. After conversion, always run readworthy validate and report any failures before presenting the token savings summary. If validation fails, report the specific failure and ask the user whether to fix manually or regenerate the affected file.</p>
+    </section>
+
+    <section class="prompt-block">
+      <h3>Example invocation prompt</h3>
+      <pre>Run readworthy init on this repository and show me the proposed migration plan. Do not convert any files until I review and approve the plan. After I approve, run the conversion, then run validate and show me the results. If validation fails on any file, stop and report the specific failure before continuing.</pre>
+    </section>
+
+    <h2 id="principles">Design Principles</h2>
+
+    <p class="principle"><strong>Never overwrite without backup.</strong> The CLI must create a .bak file for every Markdown file it modifies, in the .readworthy/backups/ directory. Conversion is reversible by design.</p>
+
+    <p class="principle"><strong>Estimates are estimates.</strong> Every token count must be labeled with ~ or "estimated" unless a real tokenizer was used. Presenting heuristic guesses as facts erodes user trust and misrepresents the tool's capabilities.</p>
+
+    <p class="principle"><strong>The skill does not contain the CLI.</strong> The agent skill is a conversational interface. The transformation logic lives exclusively in the CLI binary. Skills that contain transformation code become brittle and drift from the tool's actual behavior.</p>
+
+    <section class="callout">
+      <p><strong>Not:</strong> Markdown-to-HTML converter.<br />
+      <strong>Better:</strong> AI documentation architecture optimizer — for structure, compatibility, and context efficiency.</p>
+    </section>
+
+    <h2>CLI + Skill Relationship</h2>
+
+    <pre><code>CLI   = analysis engine, converter, validator, reporter
+Skill = conversational interface, recommendation explainer, workflow orchestrator</code></pre>
+
+    <p>The optional skill teaches the agent how to run readworthy init, interpret its plan, ask for approval at the right moment, and invoke readworthy convert. It does not duplicate the transformation logic. The two components communicate through the filesystem — plan.json, audit-report.json, and the conversion outputs.</p>
+
+  </main>
+
+  <footer style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--rw-border); max-width: var(--rw-measure); margin-inline: auto;">
+    <p style="font-family: var(--rw-mono); font-size: 0.8rem; color: var(--rw-muted);">
+      <strong>Learn:</strong> <a href="../guide.html">Guide</a> · <a href="video-summary.html">Example</a> ·
+      <strong>Understand:</strong> <a href="../research/html-first-agent-docs.html">Why HTML</a> · <a href="../research/readworthy-naming-brief.html">Naming</a> · <a href="thread-archive.html">Industry Signal</a> · <a href="research-brief.html">Research</a> · <a href="../caniuse-html-agent-docs.html">Compatibility</a> ·
+      <strong>Planned:</strong> <a href="architecture-spec.html">CLI Spec</a> ·
+      <a href="../research/sitemap.html">Site Map</a>
+    </p>
+    <p style="font-family: var(--rw-mono); font-size: 0.75rem; color: var(--rw-muted);">A <a href="https://sprintz.agency">Sprintz</a> project.</p>
+  </footer>
+
+</body>
+</html>

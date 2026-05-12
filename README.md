@@ -108,7 +108,7 @@ HTML only where semantic structure creates enough value to justify it.
 - `readworthy-naming-brief.html`: naming and positioning decision.
 - `html-first-agent-docs.html`: research thesis.
 - `caniuse-html-agent-docs.html`: compatibility matrix.
-- `cli-architecture.html`: CLI architecture reference.
+- `architecture-spec.html`: CLI architecture reference.
 - `index.html`: browser homepage for the project.
 - `guide.html`: guide and component demo.
 - `video-summary.html`: standalone output example.
