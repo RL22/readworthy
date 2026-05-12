@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HTML Artifacts, Readability, and the HTML Tax</title><link rel="stylesheet" href="../readworthy.css"></head>
+<body class="doc">
+
+<nav class="toc site-nav" aria-label="Site navigation" style="margin-bottom: 0;">
+  <a href="../index.html">← Readworthy</a>
+  <a href="../guide.html">Guide</a>
+  <a href="../examples/">Example</a>
+  <a href="../caniuse-html-agent-docs.html">Compatibility</a>
+  <a href="../examples/cli-architecture.html">CLI</a>
+</nav>
+
+<header class="doc-hero"><p class="eyebrow">Readworthy Research Artifact</p><h1>HTML Artifacts, Readability, and the HTML Tax</h1><p class="lede">A research scan of emerging projects that turn AI output, terminal output, tool calls, and files into richer browser-based interfaces — plus the counterargument that storing HTML as source can increase token cost.</p></header>
+
+<nav class="toc" aria-label="Table of contents">
+  <a href="../index.html">← Home</a>
+  <a href="#summary">Summary</a>
+  <a href="#pattern">The Pattern</a>
+  <a href="#tax">HTML Tax</a>
+</nav>
+
+<main class="prose">
+<section class="callout"><strong>Research question:</strong> Is the industry moving from plain Markdown dumps toward rendered operational artifacts, and where does that create value versus token/context waste?</section>
+<h2>Executive Summary</h2>
+<p>The linked projects point to a clear pattern: AI output is increasingly being rendered as browser-native interfaces, not just Markdown in a terminal. The movement spans agent skills, CLIs, generative UI components, no-framework HTML systems, React/MDX renderers, and skill registries.</p>
+<p>The screenshot included in the prompt highlights the strongest counterargument: HTML can cost substantially more tokens than equivalent Markdown when both store the same content. Its example frames this as “the HTML tax,” showing a 3KB Markdown file at 789 tokens versus the same content as HTML at 1,359 tokens, or 1.72× more.</p>
+<section class="warning"><strong>Core constraint:</strong> The win is not “all HTML.” The win is using HTML where the output becomes more readable, interactive, actionable, or visual — while keeping Markdown or lightweight source formats for LLM-native storage, routing, and compatibility.</section>
+
+<h2>The Pattern Across the Projects</h2>
+<table>
+<thead><tr><th>Project</th><th>Primary move</th><th>Why it matters</th></tr></thead>
+<tbody>
+<tr><td><a href="https://github.com/nicobailon/visual-explainer">visual-explainer</a></td><td>Agent skill for styled HTML explanations</td><td>Turns complex terminal output into rich HTML pages people want to read.</td></tr>
+<tr><td><a href="https://github.com/clockless-org/html-anything">html-anything</a></td><td>Converts files, folders, URLs, and ideas into live HTML pages</td><td>Shows “anything to artifact” as a broad product surface.</td></tr>
+<tr><td><a href="https://github.com/codylindley/shadcn-html">shadcn-html</a></td><td>Framework-free semantic HTML component system</td><td>Gives AI a simpler substrate for UI generation without React/build tooling.</td></tr>
+<tr><td><a href="https://github.com/smithersai/webui">smithers-webui</a></td><td>Skill + CLI for rendering React + MDX in a browser window</td><td>Targets Markdown becoming lossy in-terminal.</td></tr>
+<tr><td><a href="https://github.com/assistant-ui/tool-ui">assistant-ui/tool-ui</a></td><td>Interactive UI components for model tool payloads</td><td>Replaces raw JSON dumps with approvals, forms, tables, charts, and cards.</td></tr>
+<tr><td><a href="https://github.com/happycapy-ai/Happycapy-skills">Happycapy-skills</a></td><td>Curated skill-native collection</td><td>Signals skills as a distribution layer for production-ready workflows.</td></tr>
+</tbody>
+</table>
+<h2>Project Notes</h2>
+<section class="card"><span class="badge">Agent Skill</span><h3>visual-explainer</h3><p><a href="https://github.com/nicobailon/visual-explainer">visual-explainer</a> — visual-explainer describes itself as an agent skill that turns complex terminal output into styled HTML pages. Its README frames use cases like system architecture explanation, diff review, plan review, diagrams, data tables, and project recaps. This validates the readability thesis: replace low-bandwidth terminal output with visual explanations that are easier to scan, inspect, and share.</p></section>
+<section class="card"><span class="badge">Anything to HTML</span><h3>html-anything</h3><p><a href="https://github.com/clockless-org/html-anything">html-anything</a> — html-anything is a Codex / Claude Code skill that turns an idea, file, folder, or URL into a polished live HTML page. It can process exports like Amazon orders, WhatsApp chats, CSVs, transcripts, repos, folders of notes, and more. Its automatic style selection treats styles as design systems and layout systems, not superficial CSS skins.</p></section>
+<section class="card"><span class="badge">Component Substrate</span><h3>shadcn-html</h3><p><a href="https://github.com/codylindley/shadcn-html">shadcn-html</a> — shadcn-html positions itself as the AI prototyping substrate: themeable, semantic HTML, modern CSS, and vanilla JavaScript built on shadcn/ui tokens with no framework, build step, npm install, or abstraction layers. Its component skills document markup, variants, ARIA, and wiring conventions.</p></section>
+<section class="card"><span class="badge">Browser Render Layer</span><h3>smithers-webui</h3><p><a href="https://github.com/smithersai/webui">smithers-webui</a> — smithers-webui lets agents render React + MDX in a browser window for plans, diffs, decisions, dashboards, and other moments where Markdown in a terminal becomes lossy. Its ephemeral MDX-to-browser approach is important because rendered UI can be useful without becoming stored source bloat.</p></section>
+<section class="card"><span class="badge">Generative UI</span><h3>assistant-ui/tool-ui</h3><p><a href="https://github.com/assistant-ui/tool-ui">assistant-ui/tool-ui</a> — assistant-ui/tool-ui addresses raw model tool payloads. Instead of dumping JSON into conversation, it turns payloads into interactive UI such as approvals, forms, tables, charts, and media cards so users can understand and act without leaving the chat.</p></section>
+<section class="card"><span class="badge">Skill Distribution</span><h3>Happycapy-skills</h3><p><a href="https://github.com/happycapy-ai/Happycapy-skills">Happycapy-skills</a> — Happycapy-skills is a curated collection of production-ready skills for coding, design, documents, media, research, and automation. It matters as ecosystem evidence: skills are becoming packaging and distribution infrastructure for repeatable agent workflows.</p></section>
+<h2>The HTML Tax Counterargument</h2>
+<p>The screenshot argues that HTML can be expensive when stored as source. Its example compares the same content in Markdown and HTML, showing HTML at 1,359 tokens versus Markdown at 789 tokens. The artifact attributes the increase to tags, attributes, and class names fragmenting into more tokens.</p>
+<table>
+<thead><tr><th>Format</th><th>Example token count</th><th>Interpretation</th></tr></thead>
+<tbody>
+<tr><td>Markdown</td><td>789 tokens</td><td>Lower token cost for equivalent source content.</td></tr>
+<tr><td>HTML</td><td>1,359 tokens</td><td>Higher token cost when the same text is stored with tags/classes.</td></tr>
+<tr><td>Difference</td><td>1.72×</td><td>HTML markup can be real context overhead if loaded by the model.</td></tr>
+</tbody>
+</table>
+<section class="warning"><strong>Research implication:</strong> HTML should not be treated as the default LLM-native storage format. It is more defensible as a render target, user-facing artifact, or selectively loaded operational view.</section>
+
+<h2>What These Projects Suggest</h2>
+<div class="grid">
+<section class="card"><span class="badge green">Confirmed</span><h3>Readable artifacts are a real category</h3><p>Multiple projects converge on browser-rendered outputs for plans, diffs, dashboards, diagrams, chats, and tool payloads.</p></section>
+<section class="card"><span class="badge green">Confirmed</span><h3>Agent skills are the distribution layer</h3><p>visual-explainer, html-anything, smithers-webui, and Happycapy-skills all point toward skills as a practical packaging mechanism.</p></section>
+<section class="card"><span class="badge amber">Tension</span><h3>Render target vs source of truth</h3><p>The HTML tax screenshot makes the key distinction: HTML is valuable for humans, but not always optimal for repeated model reads.</p></section>
+<section class="card"><span class="badge green">Opportunity</span><h3>Style systems beat skins</h3><p>html-anything and shadcn-html suggest successful artifact systems need reusable layouts, tokens, accessibility, and content-aware styles.</p></section>
+</div>
+
+<h2>Strategic Takeaways</h2>
+<ol>
+<li><strong>Do not frame this as Markdown versus HTML.</strong> The stronger framing is source versus artifact.</li>
+<li><strong>Emphasize first-run value.</strong> A system should audit where HTML will help, where it will waste context, and where Markdown should remain untouched.</li>
+<li><strong>Make generated HTML purposeful.</strong> HTML should create cards, comparisons, dashboards, evidence panels, filters, or decisions — not just wrap Markdown paragraphs.</li>
+<li><strong>Keep CSS out of model context.</strong> The visual system matters for humans but should not be repeatedly loaded into the agent unless styling is the task.</li>
+<li><strong>Prefer ephemeral or generated-on-demand views.</strong> smithers-webui’s ephemeral MDX-to-browser approach is a strong pattern for avoiding stored HTML bloat.</li>
+<li><strong>Support compatibility layers.</strong> GitHub, skills, Codex, and many repo workflows still expect Markdown files such as README.md, AGENTS.md, and SKILL.md.</li>
+</ol>
+<h2>Recommended Positioning</h2>
+<section class="callout"><strong>Best synthesis:</strong> HTML is not the new source format for everything. HTML is the new interface layer for AI-generated artifacts that need to be read, reviewed, compared, or acted on.</section>
+<pre><code>Markdown = lightweight source, routing, compatibility
+HTML     = human-facing artifact, operational view, interface
+CSS      = presentation system, not default model context
+Skills   = distribution layer for repeatable artifact workflows</code></pre>
+<h2>Source Links</h2>
+<ul>
+<li><a href="https://github.com/nicobailon/visual-explainer">nicobailon/visual-explainer</a></li>
+<li><a href="https://github.com/clockless-org/html-anything">clockless-org/html-anything</a></li>
+<li><a href="https://github.com/codylindley/shadcn-html">codylindley/shadcn-html</a></li>
+<li><a href="https://github.com/smithersai/webui">smithersai/webui</a></li>
+<li><a href="https://github.com/assistant-ui/tool-ui">assistant-ui/tool-ui</a></li>
+<li><a href="https://github.com/happycapy-ai/Happycapy-skills">happycapy-ai/Happycapy-skills</a></li>
+</ul>
+</main>
+
+<footer style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--rw-border); max-width: var(--rw-measure); margin-inline: auto;">
+  <p style="font-family: var(--rw-mono); font-size: 0.8rem; color: var(--rw-muted);">
+    <strong>Learn:</strong> <a href="../guide.html">Guide</a> · <a href="../examples/video-summary.html">Example</a> ·
+    <strong>Understand:</strong> <a href="html-first-agent-docs.html">Why HTML</a> · <a href="readworthy-naming-brief.html">Naming</a> · <a href="../examples/thariq-html-thread-summary.html">Industry Signal</a> · <a href="comp-analysis-research.html">Competitive Analysis</a> · <a href="../caniuse-html-agent-docs.html">Compatibility</a> ·
+    <strong>Reference:</strong> <a href="../examples/cli-architecture.html">CLI</a> ·
+    <a href="sitemap.html">Site Map</a>
+  </p>
+  <p style="font-family: var(--rw-mono); font-size: 0.75rem; color: var(--rw-muted);">A <a href="https://sprintz.co">Sprintz</a> project.</p>
+</footer>
+
+</body>
+</html>

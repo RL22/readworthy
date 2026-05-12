@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Readworthy IA Analysis</title>
+  <link rel="stylesheet" href="../readworthy.css" />
+  <style>
+    .nav-matrix { width: 100%; font-size: 0.85em; margin: 1rem 0; }
+    .nav-matrix td { padding: 0.5rem; border: 1px solid var(--rw-border); }
+    .nav-matrix th { background: var(--rw-surface); padding: 0.5rem; text-align: left; font-weight: bold; }
+    .status-ok { color: oklch(0.55 0.15 145); }
+    .status-warn { color: oklch(0.65 0.18 75); }
+    .status-bad { color: oklch(0.55 0.2 25); }
+  </style>
+</head>
+<body class="doc">
+
+<nav class="toc site-nav" aria-label="Site navigation" style="margin-bottom: 0;">
+  <a href="../index.html">← Readworthy</a>
+  <a href="../guide.html">Guide</a>
+  <a href="../examples/">Example</a>
+  <a href="../caniuse-html-agent-docs.html">Compatibility</a>
+  <a href="sitemap.html">Site Map</a>
+</nav>
+
+<header class="doc-hero">
+  <p class="eyebrow">Internal</p>
+  <h1>IA Analysis</h1>
+  <p class="lede">Information architecture audit: navigation patterns, user journeys, issues, and recommendations for the Readworthy site.</p>
+</header>
+
+<nav class="toc" aria-label="Page sections">
+  <a href="sitemap.html">← Site Map</a>
+  <a href="#navigation-audit">Navigation Audit</a>
+  <a href="#user-journeys">User Journeys</a>
+  <a href="#issues">Issues</a>
+  <a href="#recommendations">Recommendations</a>
+  <a href="#proposed-structure">Proposed Structure</a>
+</nav>
+
+<main class="prose">
+
+<h2 id="navigation-audit">Navigation Audit</h2>
+
+<table class="nav-matrix">
+<thead>
+<tr>
+  <th>Page</th>
+  <th>Has TOC/Anchor Nav?</th>
+  <th>Links Back to Home?</th>
+  <th>Links to Other Pages?</th>
+  <th>Breadcrumbs?</th>
+  <th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>index.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">—</td>
+  <td class="status-ok">✓ (all pages)</td>
+  <td class="status-bad">✗</td>
+  <td>Hub</td>
+</tr>
+<tr>
+  <td>guide.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-ok">Connected</span></td>
+</tr>
+<tr>
+  <td>video-summary.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-warn">Partial</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-warn">Partial</span></td>
+</tr>
+<tr>
+  <td>html-first-agent-docs.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-warn">Partial</span></td>
+</tr>
+<tr>
+  <td>caniuse-html-agent-docs.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-warn">Partial</span></td>
+</tr>
+<tr>
+  <td>cli-architecture.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-warn">Partial</span></td>
+</tr>
+<tr>
+  <td>readworthy-naming-brief.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-warn">Partial</span></td>
+</tr>
+<tr>
+  <td>comp-analysis-research.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-warn">Partial</span></td>
+</tr>
+<tr>
+  <td>thariq-html-thread-summary.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-warn">Partial</span></td>
+</tr>
+<tr>
+  <td>competitive-landscape.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-bad">✗</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-warn">Partial</span></td>
+</tr>
+<tr>
+  <td>sitemap.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-ok">Connected</span></td>
+</tr>
+<tr>
+  <td>ia-analysis.html</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-ok">✓</td>
+  <td class="status-bad">✗</td>
+  <td><span class="status-ok">Connected</span></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="user-journeys">User Journeys</h2>
+
+<section class="spec-card">
+  <span class="badge">Journey 1</span>
+  <h3>"I want to learn how to use Readworthy"</h3>
+  <p><strong>Current path:</strong> Home → Guide → (stuck, no clear next step)</p>
+  <p>After reading the guide, user has no link to the compatibility matrix, CLI reference, or examples.</p>
+</section>
+
+<section class="spec-card">
+  <span class="badge">Journey 2</span>
+  <h3>"I want to understand the philosophy"</h3>
+  <p><strong>Current path:</strong> Home → Research Brief → (stranded)</p>
+  <p>Research pages are isolated. No way to navigate between related concepts without returning to home.</p>
+</section>
+
+<section class="spec-card">
+  <span class="badge">Journey 3</span>
+  <h3>"I want to decide if Readworthy fits my use case"</h3>
+  <p><strong>Current path:</strong> Home → Compatibility Matrix → (stuck)</p>
+  <p>Hard to move from "should we use this?" to "how do we use it?" — no link to guide or examples from compatibility.</p>
+</section>
+
+<section class="spec-card">
+  <span class="badge">Journey 4</span>
+  <h3>"I want to implement the CLI"</h3>
+  <p><strong>Current path:</strong> Home → CLI Architecture → (stuck)</p>
+  <p>Architecture doc exists but no implementation guide, code examples, or integration instructions linked from it.</p>
+</section>
+
+<h2 id="issues">Issues &amp; Gaps</h2>
+
+<section class="warning">
+  <h3>Pages are flat — no information hierarchy</h3>
+  <p>All pages are at the root level regardless of audience (public-facing vs. internal research). No folder structure signals intent.</p>
+</section>
+
+<section class="warning">
+  <h3>Internal documents are in the public nav</h3>
+  <p>Research Brief, Naming Brief, Compatibility matrix, and CLI Architecture are linked from the homepage alongside the Guide. This muddies the product story for new visitors.</p>
+</section>
+
+<section class="warning">
+  <h3>No clear learning path</h3>
+  <p>Optimal reading order: Home → Why HTML → Compatibility → Guide → Examples → CLI. Nothing surfaces this path.</p>
+</section>
+
+<section class="warning">
+  <h3>Guide does three jobs</h3>
+  <p>"Why Readworthy exists" (argument), "how to structure a document" (how-to), and "component reference" (dictionary) are all in one page. These serve different user intents.</p>
+</section>
+
+<aside class="note">
+  <h3>No breadcrumbs</h3>
+  <p>Users have no location signal when deep-linked into a research or reference page. Back button is the only escape.</p>
+</aside>
+
+<h2 id="recommendations">Recommendations</h2>
+
+<section class="spec-card">
+  <span class="badge">Priority 1</span>
+  <h3>Folder structure reflecting audience</h3>
+  <p>Move pages into <code>/examples/</code> and <code>/research/</code> folders. Public pages stay at root. This is the single highest-leverage change — it makes intent legible without touching content.</p>
+</section>
+
+<section class="spec-card">
+  <span class="badge">Priority 2</span>
+  <h3>Homepage as product page, not portal</h3>
+  <p>Replace the flat card grid with a focused product story: cultural hook (Thariq thread) → what it is → quick start → GitHub star CTA → 3 links (Guide, Examples, Compatibility).</p>
+</section>
+
+<section class="spec-card">
+  <span class="badge">Priority 3</span>
+  <h3>Strip the guide's opening</h3>
+  <p>The "why Readworthy exists" section in guide.html duplicates the homepage. Remove it from the guide and let the guide be a pure reference document.</p>
+</section>
+
+<section class="spec-card">
+  <span class="badge">Priority 4</span>
+  <h3>Examples gallery page</h3>
+  <p>Add <code>/examples/index.html</code> — a brief intro and 4 cards linking to the example documents. Replaces the direct video-summary link in the nav.</p>
+</section>
+
+<h2 id="proposed-structure">Proposed Site Structure</h2>
+
+<pre class="file-tree">readworthy/
+├── index.html              ← Homepage / product page
+├── guide.html              ← Component reference
+├── caniuse-html-agent-docs.html  ← Compatibility decision tool
+├── examples/
+│   ├── index.html          ← Examples gallery (new)
+│   ├── video-summary.html
+│   ├── thariq-html-thread-summary.html
+│   ├── competitive-landscape.html
+│   └── cli-architecture.html
+└── research/
+    ├── html-first-agent-docs.html
+    ├── readworthy-naming-brief.html
+    ├── comp-analysis-research.html
+    ├── sitemap.html
+    └── ia-analysis.html</pre>
+
+<aside class="note">
+  <h3>Implementation phases</h3>
+  <ol>
+    <li><strong>Phase 1:</strong> Create folder structure, move files, update all internal links</li>
+    <li><strong>Phase 2:</strong> Rewrite index.html as product page with Thariq hook and GitHub CTA</li>
+    <li><strong>Phase 3:</strong> Create examples/index.html gallery, strip guide.html opening</li>
+  </ol>
+</aside>
+
+</main>
+
+<footer style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--rw-border); max-width: var(--rw-measure); margin-inline: auto;">
+  <p style="font-family: var(--rw-mono); font-size: 0.8rem; color: var(--rw-muted);">
+    <strong>Learn:</strong> <a href="../guide.html">Guide</a> · <a href="../examples/video-summary.html">Example</a> ·
+    <strong>Understand:</strong> <a href="html-first-agent-docs.html">Why HTML</a> · <a href="readworthy-naming-brief.html">Naming</a> · <a href="../examples/thariq-html-thread-summary.html">Industry Signal</a> · <a href="comp-analysis-research.html">Competitive Analysis</a> · <a href="../caniuse-html-agent-docs.html">Compatibility</a> ·
+    <strong>Reference:</strong> <a href="../examples/cli-architecture.html">CLI</a> ·
+    <a href="sitemap.html">Site Map</a>
+  </p>
+  <p style="font-family: var(--rw-mono); font-size: 0.75rem; color: var(--rw-muted);">A <a href="https://sprintz.co">Sprintz</a> project.</p>
+</footer>
+
+</body>
+</html>

@@ -9,6 +9,14 @@
 </head>
 <body class="doc">
 
+<nav class="toc site-nav" aria-label="Site navigation" style="margin-bottom: 0;">
+  <a href="index.html">← Readworthy</a>
+  <a href="guide.html" aria-current="page">Guide</a>
+  <a href="examples/">Example</a>
+  <a href="caniuse-html-agent-docs.html">Compatibility</a>
+  <a href="examples/cli-architecture.html">CLI</a>
+</nav>
+
 <header class="doc-hero">
   <p class="eyebrow">Readworthy Guide</p>
   <h1>Markdown-Flavored HTML</h1>
@@ -19,10 +27,10 @@
 </header>
 
 <nav class="toc" aria-label="Table of contents">
-  <a href="#why-html">Why HTML</a>
+  <a href="index.html">← Home</a>
   <a href="#styling-guidance">Styling Guidance</a>
   <a href="#components">Components</a>
-  <a href="video-summary.html">Output Example</a>
+  <a href="examples/video-summary.html">Output Example</a>
 </nav>
 
 <main class="prose">
@@ -32,78 +40,6 @@
   HTML replaces Markdown when the file is no longer just writing. It becomes an
   interface, spec, artifact, or agent-readable product.
 </p>
-
-<h2>Why Readworthy Exists</h2>
-
-<p>
-Markdown is excellent for lightweight writing, but HTML provides richer semantic
-structure, reusable components, and presentation-ready outputs.
-</p>
-
-<p>
-The goal of this project is to bridge the gap between:
-</p>
-
-<ul>
-  <li>Markdown ergonomics</li>
-  <li>Semantic HTML structure</li>
-  <li>Design systems</li>
-  <li>AI-agent workflows</li>
-</ul>
-
-<h2 id="why-html">Why HTML is Superior to Markdown for AI Workflows</h2>
-
-<section>
-  <h3>1. HTML carries structure, not just text.</h3>
-  <p>
-    Markdown is readable, but HTML gives agents explicit containers:
-    <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>,
-    <code>&lt;aside&gt;</code>, <code>&lt;nav&gt;</code>,
-    <code>&lt;figure&gt;</code>, <code>&lt;time&gt;</code>, and
-    <code>&lt;code&gt;</code>. That makes the document easier to parse, style,
-    validate, and transform.
-  </p>
-</section>
-
-<section>
-  <h3>2. HTML is presentation-ready.</h3>
-  <p>
-    Markdown usually needs a renderer. HTML can be the source, preview, and
-    final artifact in one file.
-  </p>
-</section>
-
-<section>
-  <h3>3. HTML supports component thinking.</h3>
-  <p>
-    Instead of plain Markdown blocks, you can create reusable patterns:
-  </p>
-  <pre><code>&lt;section class="callout"&gt;
-&lt;section class="timestamp"&gt;
-&lt;section class="spec-card"&gt;</code></pre>
-  <p>
-    That makes it better for agent-generated docs, landing pages, reports, and
-    style guides.
-  </p>
-</section>
-
-<section>
-  <h3>4. HTML is better for design systems.</h3>
-  <p>
-    Markdown has limited styling hooks. HTML lets you apply tokens, classes,
-    spacing rules, responsive layouts, cards, grids, badges, callouts, and print
-    styles.
-  </p>
-</section>
-
-<section>
-  <h3>5. HTML reduces ambiguity for agents.</h3>
-  <p>
-    A heading in Markdown is visually obvious, but HTML gives stronger semantic
-    intent. An agent can tell the difference between a navigation block, main
-    content, supplemental aside, warning, example, or transcript section.
-  </p>
-</section>
 
 <h2 id="styling-guidance">Styling Guidance for Replacing .md with .html</h2>
 
@@ -396,6 +332,16 @@ semantic systems.
 </p>
 
 </main>
+
+<footer style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--rw-border); max-width: var(--rw-measure); margin-inline: auto;">
+  <p style="font-family: var(--rw-mono); font-size: 0.8rem; color: var(--rw-muted);">
+    <strong>Learn:</strong> <a href="guide.html">Guide</a> · <a href="examples/video-summary.html">Example</a> ·
+    <strong>Understand:</strong> <a href="research/html-first-agent-docs.html">Why HTML</a> · <a href="research/readworthy-naming-brief.html">Naming</a> · <a href="examples/thariq-html-thread-summary.html">Industry Signal</a> · <a href="research/comp-analysis-research.html">Competitive Analysis</a> · <a href="caniuse-html-agent-docs.html">Compatibility</a> ·
+    <strong>Reference:</strong> <a href="examples/cli-architecture.html">CLI</a> ·
+    <a href="research/sitemap.html">Site Map</a>
+  </p>
+  <p style="font-family: var(--rw-mono); font-size: 0.75rem; color: var(--rw-muted);">A <a href="https://sprintz.co">Sprintz</a> project.</p>
+</footer>
 
 </body>
 </html>

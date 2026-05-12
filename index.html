@@ -8,105 +8,126 @@
 </head>
 <body class="doc">
 
+<nav class="toc" aria-label="Site navigation">
+  <a href="guide.html">Guide</a>
+  <a href="examples/">Examples</a>
+  <a href="caniuse-html-agent-docs.html">Compatibility</a>
+  <a href="https://github.com/RL22/readworthy">GitHub</a>
+</nav>
+
 <header class="doc-hero">
   <p class="eyebrow">Readworthy</p>
   <h1>AI-native docs worth reading.</h1>
   <p class="lede">
-    A compatibility-first documentation toolkit for turning bloated AI-generated
-    docs into structured, scannable, operational artifacts for humans and agents.
+    Readworthy is the missing CSS layer and component vocabulary for turning
+    AI-generated text into structured, scannable HTML artifacts for humans
+    and agents.
   </p>
+  <p><a href="https://github.com/RL22/readworthy">★ Star on GitHub</a></p>
 </header>
-
-<nav class="toc" aria-label="Project navigation">
-  <a href="guide.html">Guide</a>
-  <a href="video-summary.html">Output Example</a>
-  <a href="html-first-agent-docs.html">Research Brief</a>
-  <a href="caniuse-html-agent-docs.html">Compatibility</a>
-  <a href="cli-architecture.html">CLI Architecture</a>
-  <a href="readworthy-naming-brief.html">Naming Brief</a>
-</nav>
 
 <main class="prose">
 
-<p class="principle">
-  <strong>Core model:</strong>
-  Markdown routes, HTML operates, CSS renders.
+<h2>How we got here</h2>
+
+<p>
+  AI tools now generate enormous amounts of documentation: specs, summaries,
+  agent instructions, research briefs, workflow guides. All of it lands as
+  Markdown. The format works well for a 20-line README. It breaks down at 200
+  lines. Long AI-generated Markdown is hard to read, harder to navigate, and
+  impossible to scan.
 </p>
 
-<section class="spec-card">
-  <h2>What Readworthy Is</h2>
-  <p>
-    Readworthy helps teams keep Markdown where ecosystems expect it, move
-    high-structure operational material into semantic HTML, and style those
-    documents with a tiny adaptable CSS layer.
-  </p>
-  <pre><code>.md   = compatibility, discovery, activation
-.html = structured operational docs
-.css  = presentation layer</code></pre>
-</section>
-
-<h2>Start Here</h2>
-
-<section class="card-grid">
-  <section class="spec-card">
-    <span class="badge">Guide</span>
-    <h3>Learn the language</h3>
-    <p>
-      See the document structure, component vocabulary, and CSS customization
-      model.
-    </p>
-    <p><a href="guide.html">Open the guide</a></p>
-  </section>
-
-  <section class="spec-card">
-    <span class="badge">Example</span>
-    <h3>View an output</h3>
-    <p>
-      Inspect a standalone AI-generated video summary rendered with
-      Readworthy.
-    </p>
-    <p><a href="video-summary.html">Open the example</a></p>
-  </section>
-
-  <section class="spec-card">
-    <span class="badge">Research</span>
-    <h3>Understand the thesis</h3>
-    <p>
-      Read the compatibility-first argument for HTML as an operational layer.
-    </p>
-    <p><a href="html-first-agent-docs.html">Open the research brief</a></p>
-  </section>
-
-  <section class="spec-card">
-    <span class="badge">CLI</span>
-    <h3>Review the architecture</h3>
-    <p>
-      See the planned audit, convert, validate, and context-efficiency workflow.
-    </p>
-    <p><a href="cli-architecture.html">Open CLI architecture</a></p>
-  </section>
-</section>
-
-<h2>Use It Today</h2>
+<p>
+  In 2025, Anthropic engineer Thariq Shihipar named what many teams were
+  already feeling:
+</p>
 
 <section class="example">
-  <h3>CSS-only quick start</h3>
+  <blockquote>
+    <p>"The chance of someone actually reading your spec, report or PR writeup is much much higher if it's in HTML."</p>
+    <cite><a href="https://x.com/trq212/status/2052811606032269638">Thariq Shihipar, Anthropic</a></cite>
+  </blockquote>
+</section>
+
+<p>
+  The ecosystem agreed. HTML artifacts are becoming the default output surface
+  for serious AI workflows. The tooling to produce them consistently,
+  readably, and without a framework did not exist. Readworthy is that tooling.
+</p>
+
+<h2>The solution</h2>
+
+<p>
+  Readworthy is a single CSS file and a component vocabulary. Link it from
+  any HTML file and your AI-generated output becomes structured, readable, and
+  agent-friendly: headers, callouts, spec cards, code blocks, warnings,
+  checklists, and more.
+</p>
+
+<p class="principle">
+  <strong>Core model:</strong>
+  Markdown routes. HTML operates. CSS renders.
+</p>
+
+<p>
+  Use Readworthy when the document is no longer just writing. When it becomes
+  a spec, an operational artifact, an agent instruction set, or a reference
+  surface that needs to be read by both humans and machines, that is when HTML
+  earns its place. When you need a README or a quick note, keep Markdown.
+</p>
+
+<p><a href="caniuse-html-agent-docs.html">See the compatibility guide to decide →</a></p>
+
+<h2>Quick start</h2>
+
+<section class="example">
   <pre><code>&lt;link rel="stylesheet" href="readworthy.css"&gt;</code></pre>
   <p>
     Write semantic HTML with <code>body.doc</code>, <code>header.doc-hero</code>,
     <code>main.prose</code>, and the Readworthy component classes.
+    <a href="guide.html">Read the guide →</a>
   </p>
 </section>
 
-<section class="note">
-  <h3>Package Status</h3>
+<h2>The HTML tax</h2>
+
+<p>
+  HTML costs more tokens than Markdown when loaded as model context. The same
+  content as HTML can run 1.5 to 2 times more tokens. This is real and worth
+  understanding.
+</p>
+
+<aside class="note">
   <p>
-    The CLI is planned. The current project is ready to use as a standalone CSS
-    layer and documentation pattern library.
+    Readworthy documents are render targets, not model context. Your AI
+    generates the HTML once; your team reads it many times. The token overhead
+    lives in the generation step, not in every subsequent read.
   </p>
-</section>
+  <p>
+    Keep Markdown as your routing and compatibility layer. Use HTML for the
+    outputs that need to be read.
+  </p>
+</aside>
+
+<h2>Examples</h2>
+
+<p>See what Readworthy produces across different output types.</p>
+
+<ul>
+  <li><a href="examples/video-summary.html">Video Summary</a> — content summary output</li>
+  <li><a href="examples/thariq-html-thread-summary.html">Thread Summary</a> — the "HTML is the new markdown" discussion, archived</li>
+  <li><a href="examples/competitive-landscape.html">Competitive Analysis</a> — research artifact</li>
+  <li><a href="examples/cli-architecture.html">Architecture Spec</a> — technical reference</li>
+</ul>
 
 </main>
+
+<footer style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--rw-border); max-width: var(--rw-measure); margin-inline: auto;">
+  <p style="font-family: var(--rw-mono); font-size: 0.8rem; color: var(--rw-muted);">
+    A <a href="https://sprintz.agency">Sprintz</a> project.
+  </p>
+</footer>
 
 </body>
 </html>
