@@ -4,15 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Readworthy</title>
-  <link rel="stylesheet" href="readworthy.css" />
+  <link rel="stylesheet" href="references/readworthy.css" />
 </head>
 <body class="doc">
 
-<nav class="toc" aria-label="Site navigation">
-  <a href="guide.html">Guide</a>
-  <a href="examples/">Examples</a>
-  <a href="caniuse-html-agent-docs.html">Compatibility</a>
-  <a href="https://github.com/RL22/readworthy">GitHub</a>
+<nav aria-label="Site navigation">
+  <details class="toc site-nav">
+    <summary>Menu</summary>
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="guide.html">Guide</a>
+    <a href="examples/">Examples</a>
+    <a href="caniuse-html-agent-docs.html">Compatibility</a>
+    <a href="https://github.com/RL22/readworthy">GitHub</a>
+  </details>
 </nav>
 
 <header class="doc-hero">
@@ -82,7 +86,7 @@
 <h2>Quick start</h2>
 
 <section class="example">
-  <pre><code>&lt;link rel="stylesheet" href="readworthy.css"&gt;</code></pre>
+  <pre><code>&lt;link rel="stylesheet" href="references/readworthy.css"&gt;</code></pre>
   <p>
     Write semantic HTML with <code>body.doc</code>, <code>header.doc-hero</code>,
     <code>main.prose</code>, and the Readworthy component classes.

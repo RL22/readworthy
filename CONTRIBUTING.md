@@ -21,6 +21,6 @@ compatibility-first.
 ## Before Opening a Change
 
 - Open changed HTML files directly in a browser.
-- Confirm each HTML file links to `readworthy.css`.
-- Keep `readworthy.css` small; the initial target is under 5 KB unminified.
+- Confirm each HTML file links to `references/readworthy.css`.
+- Keep `references/readworthy.css` small; the initial target is under 5 KB unminified.
 - Update `README.md` when public behavior or positioning changes.

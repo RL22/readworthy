@@ -4,16 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Readworthy Skill</title>
-  <link rel="stylesheet" href="../readworthy.css" />
+  <link rel="stylesheet" href="../references/readworthy.css" />
 </head>
 <body class="doc">
 
-<nav class="toc site-nav" aria-label="Site navigation" style="margin-bottom: 0;">
-  <a href="../index.html">← Readworthy</a>
-  <a href="../guide.html">Guide</a>
-  <a href="../examples/" aria-current="page">Examples</a>
-  <a href="../caniuse-html-agent-docs.html">Compatibility</a>
-  <a href="https://github.com/RL22/readworthy">GitHub</a>
+<nav aria-label="Site navigation">
+  <details class="toc site-nav">
+    <summary>Menu</summary>
+    <a href="../index.html">Home</a>
+    <a href="../guide.html">Guide</a>
+    <a href="../examples/" aria-current="page">Examples</a>
+    <a href="../caniuse-html-agent-docs.html">Compatibility</a>
+    <a href="https://github.com/RL22/readworthy">GitHub</a>
+  </details>
 </nav>
 
 <header class="doc-hero">
@@ -79,7 +82,7 @@ If DESIGN.md exists: map its color, typography, and radius tokens to the
 override block in &lt;head&gt; immediately after the stylesheet link.
 
 If no DESIGN.md: add one link tag and proceed.
-&lt;link rel="stylesheet" href="readworthy.css"&gt;
+&lt;link rel="stylesheet" href="../references/readworthy.css"&gt;
 </section>
 
 <section class="warning">
@@ -107,7 +110,7 @@ If no DESIGN.md: add one link tag and proceed.
   &lt;meta charset="UTF-8" /&gt;
   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
   &lt;title&gt;[Document Title]&lt;/title&gt;
-  &lt;link rel="stylesheet" href="readworthy.css" /&gt;
+  &lt;link rel="stylesheet" href="../references/readworthy.css" /&gt;
 &lt;/head&gt;
 &lt;body class="doc"&gt;
 
@@ -139,7 +142,7 @@ If no DESIGN.md: add one link tag and proceed.
 </p>
 
 <section class="example">
-  <pre><code>&lt;link rel="stylesheet" href="readworthy.css"&gt;
+  <pre><code>&lt;link rel="stylesheet" href="../references/readworthy.css"&gt;
 &lt;style&gt;
   :root {
     --rw-bg:      [background from DESIGN.md];
