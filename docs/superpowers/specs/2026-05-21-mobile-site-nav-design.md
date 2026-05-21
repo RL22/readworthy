@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-21
 **Status:** Approved (pending user review of this doc)
-**Scope:** Readworthy CSS library + site pages (`index.html`, `guide.html`, and any `examples/` page using site nav)
+**Scope:** Readworthy CSS library + site pages (`index.html`, `guide.html`, and any `examples/` page using site nav). Also restyles in-page `.toc` (table-of-contents) links to text-only and tightens `guide.html`’s page TOC.
 
 ## Problem
 
@@ -15,11 +15,13 @@ Readworthy is itself a CSS library; the fix should be added to `readworthy.css` 
 - Provide a collapsible mobile navigation pattern that lives in `readworthy.css`.
 - Apply the pattern on the Readworthy site’s cross-page navigation only.
 - Stay JS-free, semantic, accessible by default (WCAG AA).
-- Preserve the existing desktop appearance (horizontal pill row).
+- Preserve the existing desktop appearance of the site nav (horizontal pill row).
+- Restyle in-page `.toc` (table-of-contents) links as plain text — no border, no pill.
+- Drop the redundant "← Home" link from `guide.html`’s page-level TOC.
 
 ## Non-goals
 
-- In-page tables of contents (`<nav class="toc">` inside articles) are out of scope and keep their current wrapping-pill behavior.
+- In-page `.toc` collapse on mobile — they remain visible (text links wrap).
 - Off-canvas / overlay / animated drawer menus.
 - Theming or alternate visual styles (tracked separately).
 - Any JavaScript.
@@ -70,6 +72,60 @@ Add to `:root`:
 --rw-nav-breakpoint: 40rem; /* 640px */
 ```
 
+### In-page `.toc` restyle (text-only)
+
+The existing rule `.toc a, .badge { border: 1px solid var(--rw-border); border-radius: 999px; … }` applies the pill look to every `.toc` link. The pill belongs to the site nav, not to in-page TOCs. Scope the pill to `.site-nav` + `.badge`, and add a text-only treatment for in-page `.toc a`.
+
+Replace:
+
+```css
+.toc a,
+.badge { /* …pill rule… */ }
+
+.toc a:hover { /* …pill hover… */ }
+```
+
+With:
+
+```css
+.site-nav a,
+.site-nav > summary,
+.badge {
+  border: 1px solid var(--rw-border);
+  border-radius: 999px;
+  color: var(--rw-muted);
+  display: inline-block;
+  font-family: var(--rw-mono);
+  font-size: .78rem;
+  padding: .25rem .6rem;
+}
+
+.site-nav a:hover,
+.site-nav > summary:hover {
+  border-color: var(--rw-accent);
+  color: var(--rw-fg);
+}
+
+/* In-page TOC: text only (excludes site nav) */
+.toc:not(.site-nav) a {
+  color: var(--rw-muted);
+  font-family: var(--rw-mono);
+  font-size: .78rem;
+  text-decoration: none;
+}
+
+.toc:not(.site-nav) a:hover {
+  color: var(--rw-accent);
+  text-decoration: underline;
+}
+
+.toc:not(.site-nav) a[aria-current="page"] {
+  color: var(--rw-fg);
+}
+```
+
+Using `:not(.site-nav)` keeps the two patterns cleanly separated and removes any rule-order dependency.
+
 ### Rules
 
 ```css
@@ -79,19 +135,15 @@ Add to `:root`:
   margin-block: 2rem;
 }
 
+/* Disclosure-specific additions for <summary>.
+   Pill border/radius/color/font already applied via the shared rule above. */
 .site-nav > summary {
-  /* Reuse existing pill styling */
-  border: 1px solid var(--rw-border);
-  border-radius: 999px;
-  color: var(--rw-muted);
+  align-items: center;
   cursor: pointer;
   display: inline-flex;
-  align-items: center;
   gap: .4rem;
-  font-family: var(--rw-mono);
-  font-size: .78rem;
   list-style: none;            /* kill default disclosure triangle */
-  padding: .35rem .75rem;
+  padding: .35rem .75rem;      /* override shared padding for tap target */
 }
 
 .site-nav > summary::-webkit-details-marker { display: none; }
@@ -109,10 +161,7 @@ Add to `:root`:
   outline-offset: 2px;
 }
 
-.site-nav > summary:hover {
-  border-color: var(--rw-accent);
-  color: var(--rw-fg);
-}
+/* hover state shared with .site-nav a — defined in the pill rule above */
 
 /* Open state: links stack vertically below summary */
 .site-nav[open] {
@@ -161,7 +210,7 @@ Add to `:root`:
 ## Site changes
 
 1. **`index.html`** — wrap the current `<nav class="toc">` links in the new `<nav> > <details class="toc site-nav">` structure. Add `aria-current="page"` on the Home link.
-2. **`guide.html`** — replace the top `<nav class="toc site-nav">` with the new structure. Keep the inline `style="margin-bottom: 0;"` removal handled via CSS instead, or leave inline if simpler. The in-page `<nav class="toc" aria-label="Table of contents">` below the hero is unchanged.
+2. **`guide.html`** — (a) replace the top `<nav class="toc site-nav">` with the new disclosure structure; (b) remove the `<a href="index.html">← Home</a>` entry from the in-page `<nav class="toc" aria-label="Table of contents">` (the site nav already covers Home). The remaining in-page TOC links render text-only via the new CSS rule.
 3. **`examples/index.html`** — apply the same change (confirmed: has `<nav class="toc site-nav">` at line 11).
 4. **`caniuse-html-agent-docs.html`** — apply the same change (confirmed: has `<nav class="toc site-nav">` at line 11).
 
@@ -176,6 +225,7 @@ Add to `:root`:
 - Keyboard: Tab to summary, Enter to expand, Tab through links.
 - Screen reader: VoiceOver / NVDA announce "Menu, collapsed/expanded button".
 - Reduced-motion preference: confirm no chevron transition.
+- Visual regression: walk every page with a non-site `.toc` (index, guide, examples/*, research/*, caniuse-html-agent-docs.html) and confirm in-page TOC renders as text links — no pill border — and the site nav still pills correctly.
 
 ## Out-of-scope follow-ups
 
