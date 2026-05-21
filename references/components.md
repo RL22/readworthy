@@ -2,7 +2,7 @@
 
 Per-class reference for the Readworthy render layer. Pair with `references/readworthy.css` and `references/compatibility.md`.
 
-Each entry lists the class, its purpose, a minimal markup snippet, and any usage notes. Entries are short by design — keep one component's entry under 80 lines.
+Each entry lists the class, its purpose, a minimal markup snippet, and any usage notes. Entries are short by design — keep one component’s entry under 80 lines.
 
 ---
 
@@ -162,7 +162,7 @@ Each entry lists the class, its purpose, a minimal markup snippet, and any usage
 
 ```html
 <section class="callout">
-  <strong>Short answer:</strong> Readworthy works today as a reading layer.
+  <strong>Short answer:</strong> Readworthy works today as a reference layer.
 </section>
 ```
 
