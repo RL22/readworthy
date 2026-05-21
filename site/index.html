@@ -20,9 +20,9 @@
   <p class="eyebrow">Readworthy</p>
   <h1>AI-native docs worth reading.</h1>
   <p class="lede">
-    Readworthy is an agent skill and CSS render layer. Drop two lines in your
-    <code>AGENTS.md</code> and your AI starts producing structured, scannable
-    HTML artifacts instead of long Markdown walls.
+    Markdown is for agent routing. Readworthy is for the output humans have to
+    read. A CSS render layer and component vocabulary for the specs, briefs, and
+    references your team actually opens in a browser.
   </p>
   <p><a href="https://github.com/RL22/readworthy">★ Star on GitHub</a></p>
 </header>
@@ -32,11 +32,12 @@
 <h2>How we got here</h2>
 
 <p>
-  AI tools now generate enormous amounts of documentation: specs, summaries,
-  agent instructions, research briefs, workflow guides. All of it lands as
-  Markdown. The format works well for a 20-line README. It breaks down at 200
-  lines. Long AI-generated Markdown is hard to read, harder to navigate, and
-  impossible to scan.
+  AI tools generate enormous amounts of documentation: specs, summaries,
+  research briefs, workflow guides. The machine layer runs on Markdown — it's
+  portable, required by most tools, and right for agent-to-agent logic. But
+  when that output reaches a human reader, Markdown breaks down. Long
+  AI-generated Markdown is hard to read, harder to navigate, and impossible
+  to scan.
 </p>
 
 <p>
@@ -52,30 +53,30 @@
 </section>
 
 <p>
-  The ecosystem agreed. HTML artifacts are becoming the default output surface
-  for serious AI workflows. The tooling to produce them consistently,
-  readably, and without a framework did not exist. Readworthy is that tooling.
+  The consensus has settled. Markdown stays in the machine layer — routing,
+  config, agent instructions. HTML is for the output humans have to read.
+  Readworthy is the CSS layer that makes producing it practical.
 </p>
 
-<h2>The solution</h2>
+<h2>The approach</h2>
 
 <p>
-  Readworthy is an agent skill and CSS render layer. Add it to your project
-  once. From then on your AI produces structured, readable, agent-operable HTML
-  instead of Markdown: headers, callouts, spec cards, code blocks, warnings,
-  checklists, and more.
+  Generate HTML only where structure creates reading value and Markdown isn't
+  required. Readworthy handles the HTML side: a single CSS file and component
+  vocabulary that turns AI-generated content into readable artifacts — headers,
+  callouts, spec cards, code blocks, warnings, checklists.
 </p>
 
 <p class="principle">
   <strong>Core model:</strong>
-  Markdown routes. HTML operates. CSS renders.
+  Markdown routes. HTML reads. CSS renders.
 </p>
 
 <p>
-  Use Readworthy when the document is no longer just writing. When it becomes
-  a spec, an operational artifact, an agent instruction set, or a reference
-  surface that needs to be read by both humans and machines, that is when HTML
-  earns its place. When you need a README or a quick note, keep Markdown.
+  Use Readworthy when the document leaves the machine layer. When it becomes a
+  spec a team reviews, a brief stakeholders will read, or a reference someone
+  opens in a browser — that's when HTML earns its place. When it's routing
+  logic, a config file, or a quick note, keep Markdown.
 </p>
 
 <p><a href="compatibility.html">See the compatibility guide to decide →</a></p>
@@ -83,11 +84,22 @@
 <h2>Quick start</h2>
 
 <section class="example">
+  <p class="eyebrow" style="margin-bottom: 0.5rem;">1. Tell your agent — add to AGENTS.md or CLAUDE.md</p>
+  <pre><code>## Output format
+
+For specs, summaries, research briefs, architecture references, or any
+structured document longer than ~20 lines that a human will read:
+
+Produce semantic HTML using Readworthy instead of Markdown.
+Reference: https://rl22.github.io/readworthy/examples/readworthy-skill.html</code></pre>
+</section>
+
+<section class="example">
+  <p class="eyebrow" style="margin-bottom: 0.5rem;">2. Link the stylesheet in every HTML file your agent produces</p>
   <pre><code>&lt;link rel="stylesheet" href="references/readworthy.css"&gt;</code></pre>
   <p>
-    Write semantic HTML with <code>body.doc</code>, <code>header.doc-hero</code>,
-    <code>main.prose</code>, and the Readworthy component classes.
-  <a href="guide.html">Read the guide →</a>
+    <a href="examples/readworthy-skill.html">Component vocabulary →</a> ·
+    <a href="guide.html">Full guide →</a>
   </p>
 </section>
 
