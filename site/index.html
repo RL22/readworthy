@@ -4,28 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Readworthy</title>
-  <link rel="stylesheet" href="../references/readworthy.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="doc">
 
-<nav aria-label="Site navigation">
-  <details class="toc site-nav">
-    <summary>Menu</summary>
-    <a href="index.html" aria-current="page">Home</a>
-    <a href="guide.html">Guide</a>
-    <a href="examples/">Examples</a>
-    <a href="compatibility.html">Compatibility</a>
-    <a href="https://github.com/RL22/readworthy">GitHub</a>
-  </details>
+<nav class="site-nav" aria-label="Site navigation">
+  <a href="index.html" aria-current="page">Home</a>
+  <a href="guide.html">Guide</a>
+  <a href="examples/">Examples</a>
+  <a href="compatibility.html">Compatibility</a>
+  <a href="https://github.com/RL22/readworthy">GitHub</a>
 </nav>
 
 <header class="doc-hero">
   <p class="eyebrow">Readworthy</p>
   <h1>AI-native docs worth reading.</h1>
   <p class="lede">
-    Readworthy is the missing CSS layer and component vocabulary for turning
-    AI-generated text into structured, scannable HTML artifacts for humans
-    and agents.
+    Readworthy is an agent skill and CSS render layer. Drop two lines in your
+    <code>AGENTS.md</code> and your AI starts producing structured, scannable
+    HTML artifacts instead of long Markdown walls.
   </p>
   <p><a href="https://github.com/RL22/readworthy">★ Star on GitHub</a></p>
 </header>
@@ -43,14 +40,14 @@
 </p>
 
 <p>
-  In 2025, Anthropic engineer Thariq Shihipar named what many teams were
+  In 2026, Anthropic engineer Thariq Shihipar named what many teams were
   already feeling:
 </p>
 
 <section class="example">
   <blockquote>
     <p>"The chance of someone actually reading your spec, report or PR writeup is much much higher if it's in HTML."</p>
-    <cite><a href="https://x.com/trq212/status/2052811606032269638">Thariq Shihipar, Anthropic</a></cite>
+    <cite><a href="https://claude.com/blog/using-claude-code-the-unreasonable-effectiveness-of-html">Thariq Shihipar, Anthropic</a></cite>
   </blockquote>
 </section>
 
@@ -63,9 +60,9 @@
 <h2>The solution</h2>
 
 <p>
-  Readworthy is a single CSS file and a component vocabulary. Link it from
-  any HTML file and your AI-generated output becomes structured, readable, and
-  agent-friendly: headers, callouts, spec cards, code blocks, warnings,
+  Readworthy is an agent skill and CSS render layer. Add it to your project
+  once. From then on your AI produces structured, readable, agent-operable HTML
+  instead of Markdown: headers, callouts, spec cards, code blocks, warnings,
   checklists, and more.
 </p>
 
@@ -90,7 +87,7 @@
   <p>
     Write semantic HTML with <code>body.doc</code>, <code>header.doc-hero</code>,
     <code>main.prose</code>, and the Readworthy component classes.
-    <a href="guide.html">Read the guide →</a>
+  <a href="guide.html">Read the guide →</a>
   </p>
 </section>
 
