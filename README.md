@@ -4,8 +4,8 @@ AI-native docs worth reading.
 
 Readworthy is a compatibility-first documentation toolkit for AI workflows. It
 keeps Markdown where ecosystems expect Markdown, moves high-structure material
-into semantic HTML when that creates value, and uses `readworthy.css` as a tiny
-render layer for readable, agent-friendly documents.
+into semantic HTML when that creates value, and uses `references/readworthy.css`
+as a tiny render layer for readable, agent-friendly documents.
 
 ```text
 .md   = compatibility, discovery, activation
