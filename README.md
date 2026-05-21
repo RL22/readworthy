@@ -28,9 +28,29 @@ Readworthy helps teams create docs that are:
 - lightweight enough to open as standalone HTML files
 - brandable through CSS variables
 
+## Repo layout
+
+Readworthy is an agent skill bundled with a promo + docs site.
+
+```text
+readworthy/
+├── SKILL.md                 agent skill manifest
+├── references/              agent-loadable bundle
+│   ├── readworthy.css       render layer (single source of truth)
+│   ├── components.md        per-class component reference
+│   └── compatibility.md     markdown compatibility matrix
+├── index.html               browser homepage
+├── guide.html               component demo
+├── caniuse-html-agent-docs.html  human-facing compatibility page
+├── examples/                output samples
+├── research/                analysis + drafts
+├── docs/                    internal specs and plans
+└── README.md, CHANGELOG.md, CONTRIBUTING.md, PRODUCT.md, LICENSE
+```
+
 ## Quick Start
 
-Copy `readworthy.css` into your project and link it from a semantic HTML file.
+Drop the `references/` folder anywhere served alongside your HTML, then link the stylesheet.
 
 ```html
 <!DOCTYPE html>
@@ -38,7 +58,7 @@ Copy `readworthy.css` into your project and link it from a semantic HTML file.
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="readworthy.css" />
+  <link rel="stylesheet" href="references/readworthy.css" />
   <title>Project Spec</title>
 </head>
 <body class="doc">
@@ -77,6 +97,12 @@ brand or design reference.
 }
 ```
 
+## Using Readworthy as an agent skill
+
+The repo root is a valid skill in the [`agentskills.io`](https://agentskills.io) sense: `SKILL.md` provides the manifest, and `references/` contains the agent-loadable payload (render CSS plus markdown references for components and compatibility).
+
+The HTML files at the root are for human readers — they are not loaded by the agent at runtime. Point your agent at `SKILL.md`; it will pull `references/` on demand.
+
 ## Components
 
 Readworthy is an atomic design-inspired documentation language.
@@ -87,7 +113,7 @@ Readworthy is an atomic design-inspired documentation language.
 - Output templates: video summaries, compatibility matrices, product specs,
   agent docs, workflow references.
 
-See the guide in `guide.html` and the output example in `video-summary.html`.
+See the guide in `guide.html` and the output example in `examples/video-summary.html`. For an agent-friendly reference of every component class, see `references/components.md`.
 
 ## Planned CLI
 
@@ -105,13 +131,17 @@ HTML only where semantic structure creates enough value to justify it.
 
 ## Documentation
 
-- `readworthy-naming-brief.html`: naming and positioning decision.
-- `html-first-agent-docs.html`: research thesis.
-- `caniuse-html-agent-docs.html`: compatibility matrix.
-- `architecture-spec.html`: CLI architecture reference.
-- `index.html`: browser homepage for the project.
+- `SKILL.md`: agent skill manifest.
+- `references/readworthy.css`: render layer.
+- `references/components.md`: per-class component reference.
+- `references/compatibility.md`: markdown compatibility matrix.
 - `guide.html`: guide and component demo.
-- `video-summary.html`: standalone output example.
+- `index.html`: browser homepage.
+- `caniuse-html-agent-docs.html`: human-facing compatibility page.
+- `examples/`: standalone output samples.
+- `research/readworthy-naming-brief.html`: naming and positioning decision.
+- `research/html-first-agent-docs.html`: research thesis.
+- `examples/architecture-spec.html`: CLI architecture reference.
 
 ## License
 
