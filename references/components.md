@@ -72,7 +72,7 @@ Each entry lists the class, its purpose, a minimal markup snippet, and any usage
 </nav>
 ```
 
-**Notes.** Links share the same pill style as `.badge`. Add `aria-label` for accessibility. Use `class="toc site-nav"` for the persistent site-level nav variant.
+**Notes.** Links share the same pill style as `.badge`. Add `aria-label` for accessibility.
 
 ---
 
@@ -293,7 +293,7 @@ Summarize this transcript as semantic HTML.</pre>
 
 ## `.checklist`
 
-**Purpose.** An unstyled ordered list that prepends a bold accent-colored checkmark to each item, used for procedural steps or task-oriented flows.
+**Purpose.** An unstyled list that prepends a bold accent-colored checkmark to each item, used for procedural steps or task-oriented flows.
 
 **Markup.**
 
