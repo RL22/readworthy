@@ -1,8 +1,8 @@
 # Compatibility Matrix
 
-Markdown distillation of `caniuse-html-agent-docs.html`. Tells the agent when Readworthy HTML can replace, supplement, or should not be used in place of a conventional Markdown file.
+Markdown distillation of `site/compatibility.html`. Tells the agent when Readworthy HTML can replace, supplement, or should not be used in place of a conventional Markdown file.
 
-The HTML version at `/caniuse-html-agent-docs.html` is the human-facing source.
+The HTML version at `site/compatibility.html` is the human-facing source.
 
 ## Status key
 

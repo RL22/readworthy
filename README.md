@@ -39,11 +39,12 @@ readworthy/
 │   ├── readworthy.css       render layer (single source of truth)
 │   ├── components.md        per-class component reference
 │   └── compatibility.md     markdown compatibility matrix
-├── index.html               browser homepage
-├── guide.html               component demo
-├── caniuse-html-agent-docs.html  human-facing compatibility page
-├── examples/                output samples
-├── research/                analysis + drafts
+├── site/                    marketing site and docs
+│   ├── index.html           browser homepage
+│   ├── guide.html           component demo
+│   ├── compatibility.html   human-facing compatibility page
+│   ├── examples/            output samples
+│   └── research/            analysis + drafts
 ├── docs/                    internal specs and plans
 └── README.md, CHANGELOG.md, CONTRIBUTING.md, PRODUCT.md, LICENSE
 ```
@@ -113,7 +114,7 @@ Readworthy is an atomic design-inspired documentation language.
 - Output templates: video summaries, compatibility matrices, product specs,
   agent docs, workflow references.
 
-See the guide in `guide.html` and the output example in `examples/video-summary.html`. For an agent-friendly reference of every component class, see `references/components.md`.
+See the guide in `site/guide.html` and the output example in `site/examples/video-summary.html`. For an agent-friendly reference of every component class, see `references/components.md`.
 
 ## Planned CLI
 
@@ -135,13 +136,13 @@ HTML only where semantic structure creates enough value to justify it.
 - `references/readworthy.css`: render layer.
 - `references/components.md`: per-class component reference.
 - `references/compatibility.md`: markdown compatibility matrix.
-- `guide.html`: guide and component demo.
-- `index.html`: browser homepage.
-- `caniuse-html-agent-docs.html`: human-facing compatibility page.
-- `examples/`: standalone output samples.
-- `research/readworthy-naming-brief.html`: naming and positioning decision.
-- `research/html-first-agent-docs.html`: research thesis.
-- `examples/architecture-spec.html`: CLI architecture reference.
+- `site/guide.html`: guide and component demo.
+- `site/index.html`: browser homepage.
+- `site/compatibility.html`: human-facing compatibility page.
+- `site/examples/`: standalone output samples.
+- `site/research/readworthy-naming-brief.html`: naming and positioning decision.
+- `site/research/html-first-agent-docs.html`: research thesis.
+- `site/examples/architecture-spec.html`: CLI architecture reference.
 
 ## License
 
